@@ -5,23 +5,27 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MyConnection {
-    private final String URL ="jdbc:mysql://localhost:3306/petStore?useSSL=false";
-    private final String username ="root";
-    private final String passWord ="123456";
+    //    private final String URL ="jdbc:mysql://localhost:3306/petStore?useSSL=false";
+    private final String URL = "jdbc:mysql://localhost:3306/petfamily";
+    private final String username = "root";
+    private final String passWord = "123456";
     private static MyConnection myConnection;
 
     public MyConnection() {
     }
-    public static MyConnection getInstance(){
-        if (myConnection == null){
+
+    public static MyConnection getInstance() {
+        if (myConnection == null) {
             myConnection = new MyConnection();
-        }return myConnection;
+        }
+        return myConnection;
     }
-    public Connection getConnection(){
+
+    public Connection getConnection() {
         Connection connection;
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection(URL,username,passWord);
+            connection = DriverManager.getConnection(URL, username, passWord);
 
         } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);

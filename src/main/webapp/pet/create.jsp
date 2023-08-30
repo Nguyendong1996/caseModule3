@@ -55,7 +55,7 @@
         </div>
     </nav>
 </div>
-<form class="was-validated">
+<form class="was-validated" action="pets" >
     <div class="col-md-4">
         <label for="validationServer1" class="form-label">Name</label>
         <input type="text" class="form-control is-valid" id="validationServer1" value="" required>

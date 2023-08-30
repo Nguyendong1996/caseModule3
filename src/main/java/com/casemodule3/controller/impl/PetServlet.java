@@ -13,7 +13,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "PetServlet", value = "/PetServlet")
+@WebServlet(name = "PetServlet", value = "/pets")
 public class PetServlet extends HttpServlet implements IGenerateServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +56,7 @@ String action = request.getParameter("action");
     public void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().findAll();
         request.setAttribute("pets",pets);
-        RequestDispatcher rd = request.getRequestDispatcher("/pet/display.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/pet/create.jsp");
         rd.forward(request,response);
     }
 
@@ -64,7 +64,7 @@ String action = request.getParameter("action");
     public void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 List<Species> species = SpeciesService.getInstance().findAll();
 request.setAttribute("species",species);
-RequestDispatcher rd = request.getRequestDispatcher("pet/create.jsp");
+RequestDispatcher rd = request.getRequestDispatcher("/pet/create.jsp");
 rd.forward(request,response);
     }
 
