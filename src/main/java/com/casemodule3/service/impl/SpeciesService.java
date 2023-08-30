@@ -5,13 +5,13 @@ import com.casemodule3.model.Species;
 import com.casemodule3.service.IGenerateService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SpeciesService implements IGenerateService<Species> {
     private static SpeciesService speciesService;
-
-    private static SpeciesService getInstance() {
-        if (speciesService == null) {
+    public static SpeciesService getInstance(){
+        if (speciesService == null){
             speciesService = new SpeciesService();
         }
         return speciesService;
@@ -31,9 +31,9 @@ public class SpeciesService implements IGenerateService<Species> {
 
     @Override
     public void create(HttpServletRequest request) {
-        String nameSpecies = request.getParameter("nameSpecies");
-        Species species = new Species(nameSpecies);
-        SpeciesDAO.getInstance().create(species);
+String nameSpecies = request.getParameter("nameSpecies");
+Species species = new Species(nameSpecies);
+SpeciesDAO.getInstance().create(species);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SpeciesService implements IGenerateService<Species> {
     public void update(HttpServletRequest request) {
         int idSpecies = Integer.parseInt(request.getParameter("idSpecies"));
         String nameSpecies = request.getParameter("nameSpecies");
-        Species species = new Species(idSpecies, nameSpecies);
+        Species species = new Species(idSpecies,nameSpecies);
         SpeciesDAO.getInstance().update(species);
     }
 }
