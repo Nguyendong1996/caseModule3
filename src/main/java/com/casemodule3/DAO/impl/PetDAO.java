@@ -18,7 +18,7 @@ public class PetDAO implements IGenerateDAO<Pet> {
    private final String DELETE_PET ="delete from pet where idPet = ?;";
    private final String UPDATE_PET ="update pet set namePet = ?, price = ?,ipSpecies = ?,color = ?,male= ?,vaccination= ?,deWorming= ?,health= ?,quantity = ?,status = ?,source = ?,image= ? where idPet = ? ;";
 
-    private static PetDAO getInstance(){
+    public static PetDAO getInstance(){
         if (petDAO == null){
             petDAO = new PetDAO();
         }
