@@ -21,9 +21,7 @@ public class AccountDAO implements IGenerateDAO<Account> {
 
 
     private AccountDAO() {
-    }
-
-    ;
+    };
 
     public static AccountDAO getInstance() {
         if (accountDAO == null) {
@@ -60,12 +58,14 @@ public class AccountDAO implements IGenerateDAO<Account> {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
             ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.setInt(1,id);
             while (resultSet.next()) {
                 int idAccount = resultSet.getInt("idAccount");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
                 account = new Account(idAccount, username, password);
             }
+            connection.close();
         } catch (SQLException e) {
             e.getStackTrace();
         }
@@ -77,8 +77,10 @@ public class AccountDAO implements IGenerateDAO<Account> {
         Connection connection = MyConnection.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT_INTO);
-            preparedStatement.setInt(1,account.getIdAccount());
-
+            preparedStatement.setString(1,account.getUsername());
+            preparedStatement.setString(2,account.getPassword());
+            preparedStatement.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             e.getStackTrace();
         }
@@ -86,11 +88,28 @@ public class AccountDAO implements IGenerateDAO<Account> {
 
     @Override
     public void delete(int id) {
+        Connection connection = MyConnection.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID);
+            preparedStatement.setInt(1,id);
+            preparedStatement.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
 
     }
 
     @Override
     public void update(Account account) {
-
+        Connection connection = MyConnection.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
+            preparedStatement.setInt(1,account.getIdAccount());
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
     }
 }
