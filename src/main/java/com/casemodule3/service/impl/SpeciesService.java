@@ -6,7 +6,7 @@ import com.casemodule3.service.IGenerateService;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class ISpeciesService implements IGenerateService<Species> {
+public class SpeciesService implements IGenerateService<Species> {
 
     @Override
     public List<Species> findAll() {
