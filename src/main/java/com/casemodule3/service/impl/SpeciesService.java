@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SpeciesService implements IGenerateService<Species> {
     private static SpeciesService speciesService;
-    private static SpeciesService getInstance(){
+    public static SpeciesService getInstance(){
         if (speciesService == null){
             speciesService = new SpeciesService();
         }
