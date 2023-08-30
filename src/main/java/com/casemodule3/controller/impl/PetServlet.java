@@ -24,13 +24,33 @@ if (action == null){
             case "":
                 disPlay(request,response);
                 break;
+            case "create":
+                createGet(request,response);
+                break;
+            case "update":
+                updateGet(request,response);
+                break;
+            case "delete":
+                delete(request,response);
+                break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+String action = request.getParameter("action");
+    if (action == null){
+        action="";
+    }switch (action){
+                case "create":
+                    createPost(request,response);
+                    break;
+                case "update":
+                    updatePost(request,response);
+                    break;
+            }
+        }
 
-    }
 
     @Override
     public void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -50,21 +70,29 @@ rd.forward(request,response);
 
     @Override
     public void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+PetService.getInstance().create(request);
+response.sendRedirect("pet/display.jsp");
     }
 
     @Override
     public void updateGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+Pet pet = PetService.getInstance().findOne(request);
+List<Species> species = SpeciesService.getInstance().findAll();
+request.setAttribute("pet",pet);
+request.setAttribute("species",species);
+RequestDispatcher rd = request.getRequestDispatcher("pet/update.jsp");
+rd.forward(request,response);
     }
 
     @Override
     public void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+PetService.getInstance().update(request);
+response.sendRedirect("pet/display.jsp");
     }
 
     @Override
     public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+PetService.getInstance().delete(request);
+response.sendRedirect("pet/display.jsp");
     }
 }
