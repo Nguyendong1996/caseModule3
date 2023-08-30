@@ -8,14 +8,14 @@ public class Pet {
     private String color;
     private String male;
     private String vaccination;
-    private String deworming;
+    private String deWorming;
     private String health;
     private int quantity;
     private String status;
     private String source;
     private String image;
 
-    public Pet(int idPet, String namePet, double price, Species species, String color, String male, String vaccination, String deworming, String health, int quantity, String status, String source, String image) {
+    public Pet(int idPet, String namePet, double price, Species species, String color, String male, String vaccination, String deWorming, String health, int quantity, String status, String source, String image) {
         this.idPet = idPet;
         this.namePet = namePet;
         this.price = price;
@@ -23,7 +23,7 @@ public class Pet {
         this.color = color;
         this.male = male;
         this.vaccination = vaccination;
-        this.deworming = deworming;
+        this.deWorming = deWorming;
         this.health = health;
         this.quantity = quantity;
         this.status = status;
@@ -38,7 +38,7 @@ public class Pet {
         this.color = color;
         this.male = male;
         this.vaccination = vaccination;
-        this.deworming = deworming;
+        this.deWorming = deworming;
         this.health = health;
         this.quantity = quantity;
         this.status = status;
@@ -105,12 +105,12 @@ public class Pet {
         this.vaccination = vaccination;
     }
 
-    public String getDeworming() {
-        return deworming;
+    public String getDeWorming() {
+        return deWorming;
     }
 
-    public void setDeworming(String deworming) {
-        this.deworming = deworming;
+    public void setDeWorming(String deWorming) {
+        this.deWorming = deWorming;
     }
 
     public String getHealth() {
