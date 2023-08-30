@@ -10,16 +10,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ISpeciesDAO implements IGenerateDAO<Species> {
-    private static ISpeciesDAO iSpeciesDAO;
+public class SpeciesDAO implements IGenerateDAO<Species> {
+    private static SpeciesDAO speciesDAO;
     private final String SELECT_SPECIES="select * from species;";
     private final String CREATE_SPECIES = "insert into species(nameSpecies) value(?);";
+    private final String DELETE_SPECIES = "delete from species where idSpecies = ? ;";
     private final String UPDATE_SPECIES = "update species set nameSpecies = ? where idSpecies = ? ;";
-    public static ISpeciesDAO getInstance(){
-        if (iSpeciesDAO== null){
-            iSpeciesDAO = new ISpeciesDAO();
+    public static SpeciesDAO getInstance(){
+        if (speciesDAO == null){
+            speciesDAO = new SpeciesDAO();
         }
-        return iSpeciesDAO;
+        return speciesDAO;
     }
     @Override
     public List<Species> findAll() {
@@ -65,12 +66,25 @@ public class ISpeciesDAO implements IGenerateDAO<Species> {
 
     @Override
     public void delete(int id) {
-
+try {
+    PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(DELETE_SPECIES);
+    ps.setInt(1,id);
+    ps.executeUpdate();
+} catch (SQLException e) {
+    throw new RuntimeException(e);
+}
     }
 
     @Override
     public void update(Species species) {
-
+        try {
+            PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(UPDATE_SPECIES);
+            ps.setString(1,species.getNameSpecies());
+            ps.setInt(2,species.getIdSpecies());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }

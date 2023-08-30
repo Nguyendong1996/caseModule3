@@ -1,20 +1,27 @@
 package com.casemodule3.service.impl;
 
-import com.casemodule3.model.Species;
+import com.casemodule3.model.User;
 import com.casemodule3.service.IGenerateService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-public class ISpeciesService implements IGenerateService<Species> {
+public class UserService implements IGenerateService<User> {
+    private static UserService userService;
 
+    private UserService() {};
+    public static UserService getInstance() {
+        if(userService == null) {
+            userService = new UserService();
+        } return userService;
+    }
     @Override
-    public List<Species> findAll() {
+    public List<User> findAll() {
         return null;
     }
 
     @Override
-    public Species findOne(HttpServletRequest request) {
+    public User findOne(HttpServletRequest request) {
         return null;
     }
 
