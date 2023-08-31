@@ -17,13 +17,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
         switch (action) {
-            case "":
-                disPlay(request,response);
-                break;
             case "login":
                 loginGet(request,response);
                 break;
@@ -56,7 +50,7 @@ public class LoginServlet extends HttpServlet {
     public void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Account account = AccountService.getInstance().findOne(request);
         if (account == null) {
-            RequestDispatcher rq = request.getRequestDispatcher("/login/login.jsp");
+            RequestDispatcher rq = request.getRequestDispatcher("login.jsp");
             request.setAttribute("mess","Tài khoản hoặc mật khẩu không chính xác!");
             rq.forward(request,response);
         } else {
@@ -70,27 +64,29 @@ public class LoginServlet extends HttpServlet {
         String re_password = request.getParameter("re_password");
         if (!password.equals(re_password)) {
             request.setAttribute("errorPass","Mật khẩu bạn nhập không giống nhau");
-            RequestDispatcher rq = request.getRequestDispatcher("/login/register.jsp");
+            RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
             rq.forward(request,response);
         }
         else {
             Account account = AccountDAO.getInstance().checkAccountExist(username);
             if (account != null) {
                 request.setAttribute("errorUsername","Tài khoản đã tồn tại");
-                RequestDispatcher rq = request.getRequestDispatcher("/login/register.jsp");
+                RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
                 rq.forward(request,response);
 
             } else {
                 AccountService.getInstance().create(request);
-                response.sendRedirect("index.jsp");
+                RequestDispatcher rq = request.getRequestDispatcher("pet/displayAdmin");
+                rq.forward(request,response);
 
             }
         }
 
     }
     public void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rq = request.getRequestDispatcher("/login/login.jsp");
+        RequestDispatcher rq = request.getRequestDispatcher("login.jsp");
         rq.forward(request,response);
+//        response.sendRedirect("/login/login.jsp");
 
     }
     public void registerGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

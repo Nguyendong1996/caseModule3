@@ -144,7 +144,7 @@
 </div>
 
 <div class="mb-3" style="margin-top: 10px">
-    <button class="btn btn-primary" type="submit" disabled>Thêm mới</button>
+    <button class="btn btn-primary" type="submit" >Thêm mới</button>
 </div>
 </form>
 </div>

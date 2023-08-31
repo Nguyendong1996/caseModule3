@@ -32,6 +32,9 @@
                     <li class="nav-item active">
                         <a class="nav-link" href="species">Species</a>
                     </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="pets?action=login">Species</a>
+                    </li>
                 </ul>
             </div>
             <div style="margin-top: 20px">
