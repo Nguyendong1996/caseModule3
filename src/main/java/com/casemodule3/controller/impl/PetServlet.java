@@ -58,7 +58,7 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     public void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().findAll();
         request.setAttribute("pets", pets);
-        RequestDispatcher rd = request.getRequestDispatcher("/pet/displayAdmin.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("pet/displayAdmin.jsp");
         rd.forward(request, response);
     }
 
