@@ -8,6 +8,7 @@
 <h1><%= "Hello World!" %>
 </h1>
 <br/>
-<a href="hello-servlet">Hello Servlet</a>
+<a href="/logins?action=login">Đăng nhập</a><br>
+<a href="/logins?action=register">Đăng ký</a>
 </body>
 </html>
