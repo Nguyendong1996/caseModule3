@@ -29,9 +29,9 @@
         </tr>
         <c:forEach items="${species}" var="s" varStatus="index">
             <tr>
-                <td><c:out value="${index.count}"/></td>
-                <td><a href="species?action=display1&&idCategory=${s.idSpecies}"><c:out value="${s.nameSpecies}"/></a></td>
-                <td><a class="btn btn-warning" href="species?action=update&&idCategory=${s.idSpecies()}">Cập nhật</a></td>
+                <td><c:out value="${index.count}"/> </td>
+                <td><a href="species?action=display1&&idSpecies=${s.idSpecies}"><c:out value="${s.nameSpecies}"/></a></td>
+                <td><a class="btn btn-warning" href="species?action=update&&idSpecies=${s.idSpecies}">Cập nhật</a></td>
             </tr>
         </c:forEach>
     </table>

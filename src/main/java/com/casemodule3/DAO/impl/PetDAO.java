@@ -14,7 +14,7 @@ import java.util.List;
 public class PetDAO implements IGenerateDAO<Pet> {
    private static PetDAO petDAO;
    private final String SELECT_PET = "select * from pet;";
-   private final String CREATE_PET ="insert into pet(namePet,price,ipSpecies,color,male,vaccination,deWorming,health,quantity,status,source,image) value (?,?,?,?,?,?,?,?,?,?,?,?);";
+   private final String CREATE_PET ="insert into pet(namePet,price,idSpecies,color,male,vaccination,deWorming,health,quantity,status,source,image) value (?,?,?,?,?,?,?,?,?,?,?,?);";
    private final String DELETE_PET ="delete from pet where idPet = ?;";
    private final String UPDATE_PET ="update pet set namePet = ?, price = ?,ipSpecies = ?,color = ?,male= ?,vaccination= ?,deWorming= ?,health= ?,quantity = ?,status = ?,source = ?,image= ? where idPet = ? ;";
 

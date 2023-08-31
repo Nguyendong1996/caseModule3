@@ -58,7 +58,8 @@ if (action == null){
 
     @Override
     public void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.sendRedirect("species/create.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("species/create.jsp");
+      rd.forward(request,response);
     }
 
     @Override

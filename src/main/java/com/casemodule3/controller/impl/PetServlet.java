@@ -73,7 +73,7 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().create(request);
-        response.sendRedirect("pet/display.jsp");
+        response.sendRedirect("/pets");
     }
 
     @Override
@@ -89,12 +89,12 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().update(request);
-        response.sendRedirect("pet/display.jsp");
+        response.sendRedirect("/pets");
     }
 
     @Override
     public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().delete(request);
-        response.sendRedirect("pet/display.jsp");
+        response.sendRedirect("/pets");
     }
 }

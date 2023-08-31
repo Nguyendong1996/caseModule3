@@ -51,39 +51,39 @@
     </div>
     <div class="body">
 
-            <hr>
-            <h1 style="text-align: center">List Pet</h1>
-            <a class="btn btn-info" href="pets?action=create">Create</a>
-            <c:if test="${message != null}">
-                <script>
-                    alert("${message}")
-                </script>
-                <c:out value="${message}"/>
-            </c:if>
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <th>STT</th>
-                    <th>Ảnh</th>
-                    <th>Tên</th>
-                    <th>Giá</th>
-                    <th>Màu</th>
-                    <th>Giới tính</th>
-                    <th>Tiêm vacxin</th>
-                    <th>Tẩy giun</th>
-                    <th>Sức khỏe</th>
-                    <th>Số lượng</th>
-                    <th>Trạng thái</th>
-                    <th>Nguồn gốc</th>
-                    <th>Giống loài</th>
-                    <th style="width: 15%" colspan="2">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${pets}" var="p" varStatus="index">
+        <hr>
+        <h1 style="text-align: center">List Pet</h1>
+        <a class="btn btn-info" href="pets?action=create">Create</a>
+        <c:if test="${message != null}">
+            <script>
+                alert("${message}")
+            </script>
+            <c:out value="${message}"/>
+        </c:if>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>STT</th>
+                <th>Ảnh</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Màu</th>
+                <th>Giới tính</th>
+                <th>Tiêm vacxin</th>
+                <th>Tẩy giun</th>
+                <th>Sức khỏe</th>
+                <th>Số lượng</th>
+                <th>Trạng thái</th>
+                <th>Nguồn gốc</th>
+                <th>Giống loài</th>
+                <th style="width: 15%" colspan="2">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <c:forEach items="${pets}" var="p" varStatus="index">
 
-                    <tr>
-                        <div style="text-align: center">
+                <tr>
+                    <div style="text-align: center">
                         <td>${index.count}</td>
                         <td><img src="${p.image}" alt="image" width="80px" height="80px"></td>
                         <td>${p.namePet}</td>
@@ -94,17 +94,19 @@
                         <td>${p.deWorming}</td>
                         <td>${p.health}</td>
                         <td>${p.quantity}</td>
+                        <td>${p.status}</td>
                         <td>${p.source}</td>
                         <td>${p.species.nameSpecies}</td>
-                        <td><a class="btn btn-warning" href="pets?action=update&&id=${p.idPet}">Update</a></td>
-                        <td><button class="btn btn-danger" onclick="deleteS(${p.idPet})">Delete</button></td>
-                        </div>
-                    </tr>
+                        <td><a class="btn btn-warning" href="pets?action=update&&idPet=${p.idPet}">Update</a></td>
+                        <td>
+                            <a class="btn btn-danger" href="pets?action=delete&&idPet=${p.idPet}">Delete</a>
+                        </td>
+                    </div>
+                </tr>
 
-                </c:forEach>
-                </tbody>
-            </table>
-
+            </c:forEach>
+            </tbody>
+        </table>
 
 
     </div>
