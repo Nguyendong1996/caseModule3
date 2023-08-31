@@ -18,6 +18,8 @@ public class AccountDAO implements IGenerateDAO<Account> {
     private final String INSERT_INTO = "insert into account(username, password) values (?,?);";
     private final String UPDATE_BY_ID = "update account set username = ?, password = ? where idAccount = ?";
     private final String DELETE_BY_ID = "delete from account where idAccount = ?";
+    private final String LOGIN = "select * from account where username = ? and password = ?;";
+    private final String CHECK_ACCOUNT = "select * from account where username = ?;";
 
 
     private AccountDAO() {
@@ -41,7 +43,8 @@ public class AccountDAO implements IGenerateDAO<Account> {
                 int idAccount = resultSet.getInt("idAccount");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                Account account = new Account(idAccount, username, password);
+                boolean isAdmin = resultSet.getBoolean("isAdmin");
+                Account account = new Account(idAccount, username, password,isAdmin);
                 accounts.add(account);
             }
             connection.close();
@@ -63,7 +66,8 @@ public class AccountDAO implements IGenerateDAO<Account> {
                 int idAccount = resultSet.getInt("idAccount");
                 String username = resultSet.getString("username");
                 String password = resultSet.getString("password");
-                account = new Account(idAccount, username, password);
+                boolean isAdmin = resultSet.getBoolean("isAdmin");
+                account = new Account(idAccount,username,password,isAdmin);
             }
             connection.close();
         } catch (SQLException e) {
@@ -107,9 +111,50 @@ public class AccountDAO implements IGenerateDAO<Account> {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
             preparedStatement.setInt(1,account.getIdAccount());
             preparedStatement.executeUpdate();
-            preparedStatement.close();
+            connection.close();
         } catch (SQLException e) {
             e.getStackTrace();
         }
+    }
+
+    public Account login(String username, String password) {
+        Account account = null;
+        Connection connection = MyConnection.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(LOGIN);
+            preparedStatement.setString(1,username);
+            preparedStatement.setString(2,password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idAccount = resultSet.getInt("idAccount");
+                String usernameDB = resultSet.getString("username");
+                String passwordDB = resultSet.getString("password");
+                boolean isAdmin = resultSet.getBoolean("isAdmin");
+                account = new Account(idAccount,usernameDB,passwordDB,isAdmin);
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        } return account;
+    }
+    public Account checkAccountExist(String username) {
+        Account account = null;
+        Connection connection = MyConnection.getInstance().getConnection();
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(CHECK_ACCOUNT);
+            preparedStatement.setString(1,username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int idAccount = resultSet.getInt("idAccount");
+                String usernameDB = resultSet.getString("username");
+                String password = resultSet.getString("password");
+                boolean isAdmin = resultSet.getBoolean("isAdmin");
+                account = new Account(idAccount,usernameDB,password,isAdmin);
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+        return account;
     }
 }

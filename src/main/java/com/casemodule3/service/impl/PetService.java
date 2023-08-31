@@ -10,13 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 public class PetService implements IGenerateService<Pet> {
-  private static   PetService petService;
-    public static PetService getInstance(){
-        if (petService==null){
+    private static PetService petService;
+
+    public static PetService getInstance() {
+        if (petService == null) {
             petService = new PetService();
         }
         return petService;
     }
+
     @Override
     public List<Pet> findAll() {
         return PetDAO.getInstance().findAll();
@@ -43,14 +45,14 @@ public class PetService implements IGenerateService<Pet> {
         String status = request.getParameter("status");
         String source = request.getParameter("source");
         String image = request.getParameter("image");
-        Pet pet = new Pet(namePet,price,species,color,male,vaccination,deWorming,health,quantity,status,source,image);
+        Pet pet = new Pet(namePet, price, species, color, male, vaccination, deWorming, health, quantity, status, source, image);
         PetDAO.getInstance().create(pet);
     }
 
     @Override
     public void delete(HttpServletRequest request) {
-int idPet = Integer.parseInt(request.getParameter("idPet"));
-PetDAO.getInstance().delete(idPet);
+        int idPet = Integer.parseInt(request.getParameter("idPet"));
+        PetDAO.getInstance().delete(idPet);
     }
 
     @Override
@@ -69,7 +71,7 @@ PetDAO.getInstance().delete(idPet);
         String status = request.getParameter("status");
         String source = request.getParameter("source");
         String image = request.getParameter("image");
-        Pet pet = new Pet(idPet,namePet,price,species,color,male,vaccination,deWorming,health,quantity,status,source,image);
+        Pet pet = new Pet(idPet, namePet, price, species, color, male, vaccination, deWorming, health, quantity, status, source, image);
         PetDAO.getInstance().update(pet);
 
     }

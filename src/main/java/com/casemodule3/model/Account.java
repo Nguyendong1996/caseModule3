@@ -10,15 +10,18 @@ public class Account {
     public Account() {
     }
 
-    public Account(int idAccount, String username, String password) {
+
+    public Account(int idAccount, String username, String password, boolean isAdmin) {
         this.idAccount = idAccount;
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
-    public Account(String username, String password) {
+    public Account(String username, String password, boolean isAdmin) {
         this.username = username;
         this.password = password;
+        this.isAdmin = isAdmin;
     }
 
     public int getIdAccount() {
