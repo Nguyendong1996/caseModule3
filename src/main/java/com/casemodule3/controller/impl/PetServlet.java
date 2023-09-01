@@ -34,6 +34,9 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
             case "delete":
                 delete(request, response);
                 break;
+            case "displayAdmin":
+                displayAdmin(request,response);
+                break;
         }
     }
 
@@ -64,18 +67,16 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
 
     @Override
     public void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        List<Species> species = SpeciesService.getInstance().findAll();
-//        request.setAttribute("species", species);
+        List<Species> species = SpeciesService.getInstance().findAll();
+        request.setAttribute("species", species);
         RequestDispatcher rd = request.getRequestDispatcher("pet/create.jsp");
         rd.forward(request, response);
-//        response.sendRedirect("pet/create.jsp");
     }
 
     @Override
     public void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().create(request);
-        RequestDispatcher rd = request.getRequestDispatcher("/pets");
-        rd.forward(request, response);
+        displayAdmin(request,response);
 
     }
 
@@ -92,12 +93,19 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().update(request);
-        response.sendRedirect("/pets");
+        displayAdmin(request,response);
     }
 
     @Override
     public void delete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().delete(request);
-        response.sendRedirect("/pets");
+        displayAdmin(request,response);
+
+    }
+    public void displayAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Pet> pets = PetService.getInstance().findAll();
+        request.setAttribute("pets", pets);
+        RequestDispatcher rd = request.getRequestDispatcher("pet/displayAdmin.jsp");
+        rd.forward(request, response);
     }
 }

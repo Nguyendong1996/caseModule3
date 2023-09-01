@@ -5,6 +5,7 @@ import com.casemodule3.connection.MyConnection;
 import com.casemodule3.model.Pet;
 import com.casemodule3.model.Species;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,25 +13,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PetDAO implements IGenerateDAO<Pet> {
-   private static PetDAO petDAO;
-   private final String SELECT_PET = "select * from pet;";
-   private final String CREATE_PET ="insert into pet(namePet,price,idSpecies,color,male,vaccination,deWorming,health,quantity,status,source,image) value (?,?,?,?,?,?,?,?,?,?,?,?);";
-   private final String DELETE_PET ="delete from pet where idPet = ?;";
-   private final String UPDATE_PET ="update pet set namePet = ?, price = ?,ipSpecies = ?,color = ?,male= ?,vaccination= ?,deWorming= ?,health= ?,quantity = ?,status = ?,source = ?,image= ? where idPet = ? ;";
+    private static PetDAO petDAO;
+    private final String SELECT_PET = "select * from pet;";
+    private final String CREATE_PET = "insert into pet(namePet,price,idSpecies,color,male,vaccination,deWorming,health,quantity,status,source,image) value (?,?,?,?,?,?,?,?,?,?,?,?);";
+    private final String DELETE_PET = "delete from pet where idPet = ?;";
+    private final String UPDATE_PET = "update pet set namePet = ?, price = ?,ipSpecies = ?,color = ?,male= ?,vaccination= ?,deWorming= ?,health= ?,quantity = ?,status = ?,source = ?,image= ? where idPet = ? ;";
 
-    public static PetDAO getInstance(){
-        if (petDAO == null){
+    public static PetDAO getInstance() {
+        if (petDAO == null) {
             petDAO = new PetDAO();
         }
         return petDAO;
     }
+
     @Override
     public List<Pet> findAll() {
         List<Pet> pets = new ArrayList<>();
         try {
-            PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(SELECT_PET);
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(SELECT_PET);
             ResultSet resultSet = ps.executeQuery();
-            while (resultSet.next()){
+            while (resultSet.next()) {
                 int idPet = resultSet.getInt("idPet");
                 String namePet = resultSet.getString("namePet");
                 double price = resultSet.getDouble("price");
@@ -45,11 +48,12 @@ public class PetDAO implements IGenerateDAO<Pet> {
                 String status = resultSet.getString("status");
                 String source = resultSet.getString("source");
                 String image = resultSet.getString("image");
-                Pet pet = new Pet(idPet,namePet,price,species,color,male,vaccination,deWorming,health,quantity,status,source,image);
+                Pet pet = new Pet(idPet, namePet, price, species, color, male, vaccination, deWorming, health, quantity, status, source, image);
                 pets.add(pet);
             }
+            connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.getStackTrace();
         }
         return pets;
     }
@@ -57,9 +61,9 @@ public class PetDAO implements IGenerateDAO<Pet> {
     @Override
     public Pet findOne(int id) {
         List<Pet> pets = findAll();
-        for (Pet pet:pets){
-            if (pet.getIdPet()==id){
-                return  pet;
+        for (Pet pet : pets) {
+            if (pet.getIdPet() == id) {
+                return pet;
             }
         }
         return null;
@@ -68,60 +72,63 @@ public class PetDAO implements IGenerateDAO<Pet> {
     @Override
     public void create(Pet pet) {
         try {
-            PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(CREATE_PET);
-            ps.setString(1,pet.getNamePet());
-            ps.setDouble(2,pet.getPrice());
-            ps.setInt(3,pet.getSpecies().getIdSpecies());
-            ps.setString(4,pet.getColor());
-            ps.setString(5,pet.getMale());
-            ps.setString(6,pet.getVaccination());
-            ps.setString(7,pet.getDeWorming());
-            ps.setString(8,pet.getHealth());
-            ps.setInt(9,pet.getQuantity());
-            ps.setString(10,pet.getStatus());
-            ps.setString(11,pet.getSource());
-            ps.setString(12,pet.getImage());
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(CREATE_PET);
+            ps.setString(1, pet.getNamePet());
+            ps.setDouble(2, pet.getPrice());
+            ps.setInt(3, pet.getSpecies().getIdSpecies());
+            ps.setString(4, pet.getColor());
+            ps.setString(5, pet.getMale());
+            ps.setString(6, pet.getVaccination());
+            ps.setString(7, pet.getDeWorming());
+            ps.setString(8, pet.getHealth());
+            ps.setInt(9, pet.getQuantity());
+            ps.setString(10, pet.getStatus());
+            ps.setString(11, pet.getSource());
+            ps.setString(12, pet.getImage());
             ps.executeUpdate();
-            ps.close();
+            connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.getStackTrace();
         }
 
     }
 
     @Override
     public void delete(int id) {
-try {
-    PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(DELETE_PET);
-    ps.setInt(1,id);
-    ps.executeUpdate();
-    ps.close();
-} catch (SQLException e) {
-    e.printStackTrace();
-}
+        try {
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(DELETE_PET);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
     }
 
     @Override
     public void update(Pet pet) {
         try {
-            PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(UPDATE_PET);
-            ps.setString(1,pet.getNamePet());
-            ps.setDouble(2,pet.getPrice());
-            ps.setInt(3,pet.getSpecies().getIdSpecies());
-            ps.setString(4,pet.getColor());
-            ps.setString(5,pet.getMale());
-            ps.setString(6,pet.getVaccination());
-            ps.setString(7,pet.getDeWorming());
-            ps.setString(8,pet.getHealth());
-            ps.setInt(9,pet.getQuantity());
-            ps.setString(10,pet.getStatus());
-            ps.setString(11,pet.getSource());
-            ps.setString(12,pet.getImage());
-            ps.setInt(13,pet.getIdPet());
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(UPDATE_PET);
+            ps.setString(1, pet.getNamePet());
+            ps.setDouble(2, pet.getPrice());
+            ps.setInt(3, pet.getSpecies().getIdSpecies());
+            ps.setString(4, pet.getColor());
+            ps.setString(5, pet.getMale());
+            ps.setString(6, pet.getVaccination());
+            ps.setString(7, pet.getDeWorming());
+            ps.setString(8, pet.getHealth());
+            ps.setInt(9, pet.getQuantity());
+            ps.setString(10, pet.getStatus());
+            ps.setString(11, pet.getSource());
+            ps.setString(12, pet.getImage());
+            ps.setInt(13, pet.getIdPet());
             ps.executeUpdate();
-            ps.close();
+            connection.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            e.getStackTrace();
         }
 
     }

@@ -59,7 +59,11 @@ public class LoginServlet extends HttpServlet {
         } else {
             List<Pet> pets = PetService.getInstance().findAll();
             request.setAttribute("pets",pets);
-            RequestDispatcher rq = request.getRequestDispatcher("/pet/displayAdmin.jsp");
+            HttpSession session = request.getSession();
+            session.setAttribute("account", account);
+//            RequestDispatcher rq = request.getRequestDispatcher("/pet/displayAdmin.jsp");
+//            rq.forward(request,response);
+            RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
             rq.forward(request,response);
         }
 
@@ -82,7 +86,8 @@ public class LoginServlet extends HttpServlet {
 
             } else {
                 AccountService.getInstance().create(request);
-                RequestDispatcher rq = request.getRequestDispatcher("pet/displayAdmin");
+                request.setAttribute("success","Bạn đã đăng ký tài khoản thành công!");
+                RequestDispatcher rq = request.getRequestDispatcher("login.jsp");
                 rq.forward(request,response);
 
             }

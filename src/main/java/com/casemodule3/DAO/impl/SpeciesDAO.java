@@ -4,6 +4,7 @@ import com.casemodule3.DAO.IGenerateDAO;
 import com.casemodule3.connection.MyConnection;
 import com.casemodule3.model.Species;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +27,8 @@ public class SpeciesDAO implements IGenerateDAO<Species> {
     public List<Species> findAll() {
         List<Species> species = new ArrayList<>();
         try {
-            PreparedStatement  ps = MyConnection.getInstance().getConnection().prepareStatement(SELECT_SPECIES);
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement  ps = connection.prepareStatement(SELECT_SPECIES);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 int idSpecies = resultSet.getInt("idSpecies");
@@ -34,8 +36,9 @@ public class SpeciesDAO implements IGenerateDAO<Species> {
                 Species species1 = new Species(idSpecies,nameSpecies);
                 species.add(species1);
             }
+            connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+           e.getStackTrace();
         }
         return species;
     }
@@ -54,12 +57,14 @@ public class SpeciesDAO implements IGenerateDAO<Species> {
     @Override
     public void create(Species species) {
         try {
-            PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(CREATE_SPECIES);
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(CREATE_SPECIES);
             ps.setString(1,species.getNameSpecies());
             ps.executeUpdate();
             ps.close();
+            connection.close();
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            e.getStackTrace();
         }
 
     }
@@ -67,21 +72,25 @@ public class SpeciesDAO implements IGenerateDAO<Species> {
     @Override
     public void delete(int id) {
 try {
-    PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(DELETE_SPECIES);
+    Connection connection = MyConnection.getInstance().getConnection();
+    PreparedStatement ps = connection.prepareStatement(DELETE_SPECIES);
     ps.setInt(1,id);
     ps.executeUpdate();
+    connection.close();
 } catch (SQLException e) {
-    throw new RuntimeException(e);
+    e.getStackTrace();
 }
     }
 
     @Override
     public void update(Species species) {
         try {
-            PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(UPDATE_SPECIES);
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(UPDATE_SPECIES);
             ps.setString(1,species.getNameSpecies());
             ps.setInt(2,species.getIdSpecies());
             ps.executeUpdate();
+            connection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

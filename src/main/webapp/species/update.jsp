@@ -19,10 +19,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
             integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../cssHome/fontawesome-free-6.4.2-web/css/all.min.css">
+    <link rel="stylesheet" href="../cssHome/fontawesome-free-6.4.2-web/css/all.css">
+    <link rel="stylesheet" href="../cssHome/fontawesome-free-6.4.2-web/css/regular.css">
 
 
 </head>
 <body>
+<div class="container">
+<jsp:include page="../header.jsp"/>
 <div class="container mt-5">
     <form class="row g-3" action="species?action=update&&idSpecies=${species.idSpecies}" method="post">
         <div class="row">
@@ -37,6 +42,8 @@
         </div>
     </form>
 
+</div>
+<jsp:include page="../footer.jsp"/>
 </div>
 </body>
 

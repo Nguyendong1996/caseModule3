@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -33,13 +34,14 @@
 <body>
 
 <div class="limiter">
-    <div class="container-login100" style="background-image: url('login/images/bg-01.jpg');">
+    <div class="container-login100" style="background-image: url('login/images/bag-01.jpg');">
         <div class="wrap-login100 p-t-30 p-b-50">
 				<span class="login100-form-title p-b-41">
 					Đăng ký
 				</span>
+            <p class="text-danger alert" style="font-size: 20px"> <c:out value="${errorPass}"/></p>
+            <p class="text-danger alert" style="font-size: 20px"> <c:out value="${errorUsername}"/></p>
             <form class="login100-form validate-form p-b-33 p-t-5" action="logins?action=register" method="post">
-
                 <div class="wrap-input100 validate-input" data-validate = "Enter username" >
                     <input class="input100" type="text" name="username" placeholder="Tên tài khoản" required>
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
