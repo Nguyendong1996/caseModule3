@@ -24,7 +24,7 @@
 </head>
 <body>
 <div class="container mt-5">
-    <form class="row g-3" action="species?action=update&&idCategory=${species.idSpecies}" method="post">
+    <form class="row g-3" action="species?action=update&&idSpecies=${species.idSpecies}" method="post">
         <div class="row">
             <div class="col-md-6">
                 <label for="nameSpecies" class="form-label">Name</label>

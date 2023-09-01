@@ -2,13 +2,16 @@ package com.casemodule3.controller.impl;
 
 import com.casemodule3.DAO.impl.AccountDAO;
 import com.casemodule3.model.Account;
+import com.casemodule3.model.Pet;
 import com.casemodule3.service.impl.AccountService;
+import com.casemodule3.service.impl.PetService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "LoginServlet", value = "/logins")
 public class LoginServlet extends HttpServlet {
@@ -43,7 +46,7 @@ public class LoginServlet extends HttpServlet {
         }
     }
     public void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rq = request.getRequestDispatcher("index.jsp");
+        RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
         rq.forward(request,response);
     }
 
@@ -54,7 +57,10 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("mess","Tài khoản hoặc mật khẩu không chính xác!");
             rq.forward(request,response);
         } else {
-            response.sendRedirect("index.jsp");
+            List<Pet> pets = PetService.getInstance().findAll();
+            request.setAttribute("pets",pets);
+            RequestDispatcher rq = request.getRequestDispatcher("/pet/displayAdmin.jsp");
+            rq.forward(request,response);
         }
 
     }
@@ -86,11 +92,10 @@ public class LoginServlet extends HttpServlet {
     public void loginGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rq = request.getRequestDispatcher("login.jsp");
         rq.forward(request,response);
-//        response.sendRedirect("/login/login.jsp");
 
     }
     public void registerGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rq = request.getRequestDispatcher("/login/register.jsp");
+        RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
         rq.forward(request,response);
 
     }

@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public interface IGenerateServlet {
-        void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+        void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException;
         void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
         void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
         void updateGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;

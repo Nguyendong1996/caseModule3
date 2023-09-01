@@ -50,7 +50,7 @@
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
-                    <input class="input100" type="password" name="re_password" placeholder="Nhập lại mật khẩu"required>
+                    <input class="input100" type="password" name="re_password" placeholder="Nhập lại mật khẩu" required>
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
 
