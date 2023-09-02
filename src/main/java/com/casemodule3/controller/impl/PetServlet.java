@@ -76,6 +76,7 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().create(request);
+        request.setAttribute("create", "Bạn vừa thêm 1 sản phẩm thành công");
         displayAdmin(request,response);
 
     }
@@ -93,6 +94,7 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PetService.getInstance().update(request);
+        request.setAttribute("update", "Bạn vừa cập nhật 1 sản phẩm thành công");
         displayAdmin(request,response);
     }
 

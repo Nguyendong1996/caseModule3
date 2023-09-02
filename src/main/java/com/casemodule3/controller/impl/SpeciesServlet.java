@@ -67,7 +67,8 @@ public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SpeciesService.getInstance().create(request);
-        response.sendRedirect("/species");
+        request.setAttribute("create", "Bạn vừa thêm mới thành công");
+        disPlay(request,response);
     }
 
     @Override
@@ -81,7 +82,8 @@ public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SpeciesService.getInstance().update(request);
-        response.sendRedirect("/species");
+        request.setAttribute("update", "Bạn vừa cập nhật thành công");
+        disPlay(request,response);;
     }
 
     @Override

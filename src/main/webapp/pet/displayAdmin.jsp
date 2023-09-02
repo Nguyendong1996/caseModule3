@@ -22,13 +22,18 @@
 
         <hr>
         <h1 style="text-align: center">Danh sách thú cưng </h1>
-        <a class="btn btn-info" href="pets?action=create">Thêm mới</a>
-        <c:if test="${message != null}">
+        <c:if test="${create != null}">
             <script>
-                alert("${message}")
+                alert("${create}")
             </script>
-            <c:out value="${message}"/>
         </c:if>
+        <c:if test="${update != null}">
+            <script>
+                alert("${update}")
+            </script>
+        </c:if>
+        <br>
+        <a class="btn btn-info" href="pets?action=create">Thêm mới</a>
         <table class="table table-hover">
             <thead>
             <tr>
@@ -68,7 +73,7 @@
                         <td>${p.species.nameSpecies}</td>
                         <td><a class="btn btn-warning" href="pets?action=update&&idPet=${p.idPet}">Cập nhật</a></td>
                         <td>
-                            <a class="btn btn-danger" href="pets?action=delete&&idPet=${p.idPet}">Xóa</a>
+                            <a class="btn btn-danger" onclick="deletePet(${p.getIdPet()})" href="pets?action=delete&&idPet=${p.idPet}">Xóa</a>
                         </td>
                     </div>
                 </tr>
@@ -89,8 +94,8 @@
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
 <script>
-    function deleteProduct(id) {
-        if (confirm("Are you sure?")) {
+    function deletePet(id) {
+        if (confirm("Bạn có muốn xóa không?")) {
             window.location.href = "pets?action=delete&&id=" + id
         }
     }

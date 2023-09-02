@@ -26,6 +26,19 @@
     <jsp:include page="../header.jsp"/>
 
     <div class="container" style="margin-top: 40px">
+        <hr>
+        <h1 style="text-align: center">Danh sách giống loài </h1>
+        <c:if test="${create != null}">
+            <script>
+                alert("${create}")
+            </script>
+        </c:if>
+        <c:if test="${update != null}">
+            <script>
+                alert("${update}")
+            </script>
+        </c:if>
+        <br>
         <table class="table table-hover">
             <tr>
                 <th>STT</th>
@@ -39,7 +52,7 @@
                             value="${s.nameSpecies}"/></a></td>
                     <td><a class="btn btn-warning" href="species?action=update&&idSpecies=${s.idSpecies}">Cập nhật</a>
                     </td>
-                    <td><a class="btn btn-danger" href="species?action=delete&&idSpecies=${s.idSpecies}">Xóa</a>
+                    <td><a class="btn btn-danger" onclick="deleteSpecies(${s.idSpecies})" href="species?action=delete&&idSpecies=${s.idSpecies}">Xóa</a>
                     </td>
                 </tr>
             </c:forEach>
@@ -48,7 +61,13 @@
     </div>
     <jsp:include page="../footer.jsp"/>
 </div>
-
+<script>
+    function deleteSpecies(id) {
+        if (confirm("Bạn có muốn xóa không?")) {
+            window.location.href = "species?action=delete&&id=" + id
+        }
+    }
+</script>
 </body>
 
 </html>

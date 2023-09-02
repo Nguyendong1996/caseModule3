@@ -75,7 +75,10 @@
                             <label class="form-label">* Màu sắc</label>
 
                             <select class="form-select" aria-label="select example" name="color">
-                                <option value="Màu Đen Tuyền">Màu Đen Tuyền</option>
+                                <option value="Màu đen trắng">Màu đen trắng</option>
+                                <option value="Màu kem">Màu kem</option>
+                                <option value="Màu nâu">Màu nâu</option>
+                                <option value="Màu nâu đỏ">Màu nâu đỏ</option>
                                 <option value="Màu xám">Màu xám</option>
                                 <option value="Màu vàng">Màu vàng</option>
                                 <option value="Màu trắng">Màu trắng</option>
