@@ -13,11 +13,10 @@
                         <img src="cssHome/logoWeb.png" alt="logo" style="width: 100px" height="60px"></a>
 
                 </li>
-                <c:if test="${sessionScope.account.isAdmin() == false}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Giới thiệu</a>
-                    </li>
-                </c:if>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Giới thiệu</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button"
                        data-bs-toggle="dropdown" aria-expanded="false">
@@ -53,12 +52,16 @@
                         <li><a class="dropdown-item" href="#">Phối giống cho thú cưng</a></li>
                     </ul>
                 </li>
-                <c:if test="${sessionScope.account.isAdmin() == false}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="">Liên hệ</a>
-                    </li>
-                </c:if>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Liên hệ</a>
+                </li>
+
+                <c:if test="${sessionScope.account.isAdmin()}">
+                <li style="margin-left: 30px">
+                    </c:if>
+                    <c:if test="${sessionScope.account.isAdmin() == false || sessionScope.account == null}">
                 <li style="margin-left: 80px">
+                    </c:if>
                     <form class="d-flex">
                         <input style="height: 45px ; margin-top: 5px" class="form-control me-2" type="search"
                                placeholder="Tìm kiếm" aria-label="Search">
@@ -66,6 +69,7 @@
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </li>
+
 
                 <c:if test="${sessionScope.account == null}">
 

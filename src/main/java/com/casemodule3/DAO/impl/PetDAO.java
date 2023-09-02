@@ -17,7 +17,7 @@ public class PetDAO implements IGenerateDAO<Pet> {
     private final String SELECT_PET = "select * from pet;";
     private final String CREATE_PET = "insert into pet(namePet,price,idSpecies,color,male,vaccination,deWorming,health,quantity,status,source,image) value (?,?,?,?,?,?,?,?,?,?,?,?);";
     private final String DELETE_PET = "delete from pet where idPet = ?;";
-    private final String UPDATE_PET = "update pet set namePet = ?, price = ?,ipSpecies = ?,color = ?,male= ?,vaccination= ?,deWorming= ?,health= ?,quantity = ?,status = ?,source = ?,image= ? where idPet = ? ;";
+    private final String UPDATE_PET = "update pet set namePet = ?, price = ?,idSpecies = ?,color = ?,male= ?,vaccination= ?,deWorming= ?,health= ?,quantity = ?,status = ?,source = ?,image= ? where idPet = ? ;";
 
     public static PetDAO getInstance() {
         if (petDAO == null) {
@@ -71,8 +71,8 @@ public class PetDAO implements IGenerateDAO<Pet> {
 
     @Override
     public void create(Pet pet) {
+        Connection connection = MyConnection.getInstance().getConnection();
         try {
-            Connection connection = MyConnection.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(CREATE_PET);
             ps.setString(1, pet.getNamePet());
             ps.setDouble(2, pet.getPrice());
@@ -96,8 +96,8 @@ public class PetDAO implements IGenerateDAO<Pet> {
 
     @Override
     public void delete(int id) {
+        Connection connection = MyConnection.getInstance().getConnection();
         try {
-            Connection connection = MyConnection.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(DELETE_PET);
             ps.setInt(1, id);
             ps.executeUpdate();
@@ -109,8 +109,8 @@ public class PetDAO implements IGenerateDAO<Pet> {
 
     @Override
     public void update(Pet pet) {
+        Connection connection = MyConnection.getInstance().getConnection();
         try {
-            Connection connection = MyConnection.getInstance().getConnection();
             PreparedStatement ps = connection.prepareStatement(UPDATE_PET);
             ps.setString(1, pet.getNamePet());
             ps.setDouble(2, pet.getPrice());

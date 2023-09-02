@@ -14,36 +14,38 @@ import java.util.List;
 public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String action = request.getParameter("action");
-if (action== null){
-    action= "";
-}switch (action){
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
             case "":
-                disPlay(request,response);
+                disPlay(request, response);
                 break;
             case "create":
-                createGet(request,response);
+                createGet(request, response);
                 break;
             case "update":
-                updateGet(request,response);
+                updateGet(request, response);
                 break;
             case "delete":
-                delete(request,response);
+                delete(request, response);
                 break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String action = request.getParameter("action");
-if (action == null){
-    action = "";
-}switch (action){
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
             case "create":
-                createPost(request,response);
+                createPost(request, response);
                 break;
             case "update":
-                updatePost(request,response);
+                updatePost(request, response);
                 break;
         }
     }
@@ -59,7 +61,7 @@ if (action == null){
     @Override
     public void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("species/create.jsp");
-      rd.forward(request,response);
+        rd.forward(request, response);
     }
 
     @Override

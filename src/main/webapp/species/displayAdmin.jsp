@@ -39,6 +39,8 @@
                             value="${s.nameSpecies}"/></a></td>
                     <td><a class="btn btn-warning" href="species?action=update&&idSpecies=${s.idSpecies}">Cập nhật</a>
                     </td>
+                    <td><a class="btn btn-danger" href="species?action=delete&&idSpecies=${s.idSpecies}">Xóa</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
