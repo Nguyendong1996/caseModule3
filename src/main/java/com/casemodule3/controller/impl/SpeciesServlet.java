@@ -20,7 +20,7 @@ public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
         }
         switch (action) {
             case "":
-                disPlay(request, response);
+                display(request, response);
                 break;
             case "create":
                 createGet(request, response);
@@ -51,7 +51,7 @@ public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
     }
 
     @Override
-    public void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Species> speciesList = SpeciesService.getInstance().findAll();
         request.setAttribute("species", speciesList);
         RequestDispatcher rd = request.getRequestDispatcher("species/displayAdmin.jsp");
@@ -68,7 +68,7 @@ public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
     public void createPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SpeciesService.getInstance().create(request);
         request.setAttribute("create", "Bạn vừa thêm mới thành công");
-        disPlay(request,response);
+        display(request,response);
     }
 
     @Override
@@ -83,7 +83,7 @@ public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
     public void updatePost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SpeciesService.getInstance().update(request);
         request.setAttribute("update", "Bạn vừa cập nhật thành công");
-        disPlay(request,response);;
+        display(request,response);;
     }
 
     @Override

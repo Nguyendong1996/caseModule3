@@ -12,6 +12,34 @@
     <link rel="stylesheet" href="cssHome/fontawesome-free-6.4.2-web/css/all.min.css">
     <link rel="stylesheet" href="cssHome/fontawesome-free-6.4.2-web/css/all.css">
     <link rel="stylesheet" href="cssHome/fontawesome-free-6.4.2-web/css/regular.css">
+    <style>
+        .namePet1 {
+            text-align: center;
+            font-family: Comic Sans MS
+            cursive;
+            font-weight: bold;
+            font-size: 25px;
+            color: rgb(217, 102, 60);
+            text-decoration: none;
+        }
+        .pricePet1 {
+            text-align: center;
+            font-family: Comic Sans MS
+            cursive;
+            font-style: italic;
+            font-weight: bold;
+            font-size: 20px;
+            color: #af1010;
+        }
+        .image-container img {
+            transition-duration: 0.5s;
+            transition-timing-function: ease;
+        }
+
+        .image-container:hover img {
+            transform: scale(1.02);
+        }
+    </style>
 
 </head>
 <body>
@@ -63,8 +91,10 @@
     <div class="item3 item">
         <div class="list-group">
             <a href="#" class="list-group-item active">Danh mục thú cưng</a>
-            <a href="#" class="list-group-item">Chó</a>
-            <a href="#" class="list-group-item">Mèo</a>
+            <c:forEach items="${speciesList}" var="s">
+            <a href="pets?action=displayBySpecies&&idSpecies=${s.getIdSpecies()}"
+               class="list-group-item"><c:out value="${s.nameSpecies}"/></a>
+            </c:forEach>
         </div>
         <div class="dropdown">
             <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -73,8 +103,8 @@
                 Sắp xếp
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Theo giá từ thấp đến cao</a></li>
-                <li><a class="dropdown-item" href="#">Theo giá từ cao đến thấp</a></li>
+                <li><a class="dropdown-item" href="pets?action=sortByPriceAS">Theo giá từ thấp đến cao</a></li>
+                <li><a class="dropdown-item" href="pets?action=sortByPriceDESC">Theo giá từ cao đến thấp</a></li>
             </ul>
         </div>
     </div>
@@ -88,12 +118,12 @@
 
         <c:forEach items="${pets}" var="p">
             <div class="abc">
-                <div class="product" style="margin-top: 3px"><img src="${p.image}" alt="image" width="300x"
-                                                                  height="300px"></div>
-                <div class="product"><a href="pets?action=detail&&idPet=${p.idPet}"><c:out
+                <div class="image-container">
+                    <img src="${p.image}" alt="image" width="300x" height="300px"></div>
+              <div class="namePet1"><a style="text-decoration: none; color: brown" href="pets?action=detail&&idPet=${p.idPet}"><c:out
                         value="${p.namePet}"/></a></div>
-                <div class="product" style="margin: 5px 50px "><c:out value="${p.price}"/> VNĐ</div>
-                <a class="btn btn-outline-success" href="pets?action=update&&idPet=${p.idPet}">Mua ngay</a>
+               <div class="pricePet1"><c:out value="${p.price}"/> VNĐ</div>
+                <a class="btn btn-danger" href="carts?action=create&&idPet=${p.idPet}">Thêm vào giỏ hàng</a>
             </div>
         </c:forEach>
     </div>

@@ -23,7 +23,7 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
         }
         switch (action) {
             case "":
-                disPlay(request, response);
+                display(request, response);
                 break;
             case "create":
                 createGet(request, response);
@@ -36,6 +36,18 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
                 break;
             case "displayAdmin":
                 displayAdmin(request,response);
+                break;
+            case "detail":
+                detail(request,response);
+                break;
+            case "sortByPriceAS":
+                sortByPriceAS(request,response);
+                break;
+            case "sortByPriceDESC":
+                sortByPriceDESC(request,response);
+                break;
+            case "displayBySpecies":
+                displayBySpecies(request,response);
                 break;
         }
     }
@@ -53,14 +65,21 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
             case "update":
                 updatePost(request, response);
                 break;
+            case "searchByName":
+                searchByName(request,response);
+                break;
+            case "searchByPrice":
+                searchByName(request,response);
         }
     }
 
 
     @Override
-    public void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().findAll();
         request.setAttribute("pets", pets);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rd = request.getRequestDispatcher("home.jsp");
         rd.forward(request, response);
     }
@@ -110,4 +129,43 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
         RequestDispatcher rd = request.getRequestDispatcher("pet/displayAdmin.jsp");
         rd.forward(request, response);
     }
+    public void detail(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        Pet pet = PetService.getInstance().findOne(request);
+        request.setAttribute("pet", pet);
+        RequestDispatcher rq = request.getRequestDispatcher("/pet/detail.jsp");
+        rq.forward(request, response);
+    }
+    public void searchByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Pet> pets = PetService.getInstance().searchByName(request);
+        request.setAttribute("pets", pets);
+        RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
+        rq.forward(request, response);
+    }
+
+    public void searchByPrice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Pet> pets = PetService.getInstance().searchByPrice(request);
+        request.setAttribute("pets", pets);
+        RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
+        rq.forward(request, response);
+    }
+
+    public void sortByPriceAS(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Pet> pets = PetService.getInstance().sortByPriceAS(request);
+        request.setAttribute("pets", pets);
+        RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
+        rq.forward(request, response);
+    }
+    public void sortByPriceDESC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Pet> pets = PetService.getInstance().sortByPriceDESC(request);
+        request.setAttribute("pets", pets);
+        RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
+        rq.forward(request, response);
+    }
+    public void displayBySpecies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Pet> pets = PetService.getInstance().getPetsBySpecies(request);
+        request.setAttribute("pets", pets);
+        RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
+        rq.forward(request, response);
+    }
+
 }

@@ -23,8 +23,10 @@
                         Giống loài
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Chó</a></li>
-                        <li><a class="dropdown-item" href="#">Mèo</a></li>
+                        <c:forEach items="${speciesList}" var="s">
+                          <li>  <a href="pets?action=displayBySpecies&&idSpecies=${s.getIdSpecies()}"
+                               class="list-group-item"><c:out value="${s.nameSpecies}"/></a></li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <c:if test="${sessionScope.account.isAdmin()}">
@@ -62,9 +64,9 @@
                     <c:if test="${sessionScope.account.isAdmin() == false || sessionScope.account == null}">
                 <li style="margin-left: 80px">
                     </c:if>
-                    <form class="d-flex">
+                    <form class="d-flex" action="pets?action=searchByName" method="post">
                         <input style="height: 45px ; margin-top: 5px" class="form-control me-2" type="search"
-                               placeholder="Tìm kiếm" aria-label="Search">
+                               placeholder="Tìm kiếm" aria-label="Search" name="search" value="${search}">
                         <button class="btn " style="font-size: 27px; width: 40px" type="submit"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
