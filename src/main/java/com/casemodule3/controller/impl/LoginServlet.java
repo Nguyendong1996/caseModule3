@@ -3,8 +3,10 @@ package com.casemodule3.controller.impl;
 import com.casemodule3.DAO.impl.AccountDAO;
 import com.casemodule3.model.Account;
 import com.casemodule3.model.Pet;
+import com.casemodule3.model.Species;
 import com.casemodule3.service.impl.AccountService;
 import com.casemodule3.service.impl.PetService;
+import com.casemodule3.service.impl.SpeciesService;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -45,13 +47,10 @@ public class LoginServlet extends HttpServlet {
 
         }
     }
-    public void disPlay(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
-        rq.forward(request,response);
-    }
+
 
     public void loginPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Account account = AccountService.getInstance().findOne(request);
+        Account account = AccountService.getInstance().login(request);
         if (account == null) {
             RequestDispatcher rq = request.getRequestDispatcher("login.jsp");
             request.setAttribute("mess","Tài khoản hoặc mật khẩu không chính xác!");
@@ -61,8 +60,8 @@ public class LoginServlet extends HttpServlet {
             request.setAttribute("pets",pets);
             HttpSession session = request.getSession();
             session.setAttribute("account", account);
-//            RequestDispatcher rq = request.getRequestDispatcher("/pet/displayAdmin.jsp");
-//            rq.forward(request,response);
+            List<Species> speciesList = SpeciesService.getInstance().findAll();
+            request.setAttribute("speciesList", speciesList);
             RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
             rq.forward(request,response);
         }

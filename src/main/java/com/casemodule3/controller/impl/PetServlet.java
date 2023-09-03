@@ -49,15 +49,15 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
             case "displayBySpecies":
                 displayBySpecies(request,response);
                 break;
+            case "searchByPrice":
+                searchByPrice(request,response);
+                break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
-        if (action == null) {
-            action = "";
-        }
         switch (action) {
             case "create":
                 createPost(request, response);
@@ -126,6 +126,8 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     public void displayAdmin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().findAll();
         request.setAttribute("pets", pets);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rd = request.getRequestDispatcher("pet/displayAdmin.jsp");
         rd.forward(request, response);
     }
@@ -138,6 +140,8 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     public void searchByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().searchByName(request);
         request.setAttribute("pets", pets);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
         rq.forward(request, response);
     }
@@ -145,6 +149,8 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     public void searchByPrice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().searchByPrice(request);
         request.setAttribute("pets", pets);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
         rq.forward(request, response);
     }
@@ -152,18 +158,24 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     public void sortByPriceAS(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().sortByPriceAS(request);
         request.setAttribute("pets", pets);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
         rq.forward(request, response);
     }
     public void sortByPriceDESC(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().sortByPriceDESC(request);
         request.setAttribute("pets", pets);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
         rq.forward(request, response);
     }
     public void displayBySpecies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pet> pets = PetService.getInstance().getPetsBySpecies(request);
         request.setAttribute("pets", pets);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rq = request.getRequestDispatcher("home.jsp");
         rq.forward(request, response);
     }

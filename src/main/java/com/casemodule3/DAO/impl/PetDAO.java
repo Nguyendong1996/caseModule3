@@ -19,7 +19,7 @@ public class PetDAO implements IGenerateDAO<Pet> {
     private final String CREATE_PET = "insert into pet(namePet,price,idSpecies,color,male,vaccination,deWorming,health,quantity,status,source,image) value (?,?,?,?,?,?,?,?,?,?,?,?);";
     private final String DELETE_PET = "delete from pet where idPet = ?;";
     private final String UPDATE_PET = "update pet set namePet = ?, price = ?,idSpecies = ?,color = ?,male= ?,vaccination= ?,deWorming= ?,health= ?,quantity = ?,status = ?,source = ?,image= ? where idPet = ? ;";
-    private final String SELECT_BY_ID_SPECIES = "select * from product where idSpecies = ?;";
+    private final String SELECT_BY_ID_SPECIES = "select * from pet where idSpecies = ?;";
     private final String SELECT_PET_BY_NAME = "select * from pet where namePet like ?;";
     private final String SELECT_PET_BY_PRICE = "select * from pet where price >= ? and price <= ?;";
     private final String SORT_PET_BY_PRICE_AS = "select * from pet order by price;";

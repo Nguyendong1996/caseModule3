@@ -29,9 +29,8 @@ public class AccountService implements IGenerateService<Account> {
 
     @Override
     public Account findOne(HttpServletRequest request) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        return AccountDAO.getInstance().login(username,password);
+        int idAccount = Integer.parseInt(request.getParameter("idAccount"));
+        return AccountDAO.getInstance().findOne(idAccount);
     }
 
     @Override
@@ -45,32 +44,24 @@ public class AccountService implements IGenerateService<Account> {
 
     @Override
     public void delete(HttpServletRequest request) {
+        int idAccount = Integer.parseInt(request.getParameter("idAccount"));
+        AccountDAO.getInstance().delete(idAccount);
 
     }
 
     @Override
     public void update(HttpServletRequest request) {
+        int idAccount = Integer.parseInt(request.getParameter("idAccount"));
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        Account account = new Account(idAccount,username,password);
+        AccountDAO.getInstance().update(account);
 
     }
-//    public Account register(HttpServletRequest request) {
-//        String username = request.getParameter("username");
-//        String password = request.getParameter("password");
-//        String re_password = request.getParameter("re_password");
-//        if (!password.equals(re_password)) {
-//            request.setAttribute("errorPass","Mật khẩu bạn nhập không giống nhau");
-//            RequestDispatcher rq = request.getRequestDispatcher("/login/register.jsp");
-//        }
-//        else {
-//            Account account = AccountDAO.getInstance().checkAccountExist(username);
-//            if (account == null) {
-//                request.setAttribute("errorUsername","Tài khoản đã tồn tại");
-//                RequestDispatcher rq = request.getRequestDispatcher("/login/register.jsp");
-//
-//            } else {
-//
-//            }
-//        }
-
-//    }
+    public Account login(HttpServletRequest request) {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        return AccountDAO.getInstance().login(username,password);
+    }
 
 }

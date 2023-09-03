@@ -24,6 +24,17 @@ public class Account {
         this.isAdmin = isAdmin;
     }
 
+    public Account(int idAccount, String username, String password) {
+        this.idAccount = idAccount;
+        this.username = username;
+        this.password = password;
+    }
+    public Account( String username, String password) {
+
+        this.username = username;
+        this.password = password;
+    }
+
     public int getIdAccount() {
         return idAccount;
     }
