@@ -90,7 +90,6 @@ public class UserDAO implements IGenerateDAO<User> {
             ResultSet resultSet = preparedStatement.getResultSet();
             preparedStatement.setInt(1, id);
             while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
                 int idAccount = resultSet.getInt("idAccount");
                 Account account = AccountDAO.getInstance().findOne(idAccount);
                 String fullName = resultSet.getString("fullName");

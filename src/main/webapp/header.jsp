@@ -36,7 +36,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="pets?action=displayAdmin">Danh sách thú cưng</a></li>
                             <li><a class="dropdown-item" href="species?action=display">Danh sách giống loài</a></li>
-                            <li><a class="dropdown-item" href="accounts?action=display">Danh sách khách hàng</a></li>
+                            <li><a class="dropdown-item" href="accounts?action=display">Danh sách tài khoản</a></li>
                         </ul>
                     </li>
                 </c:if>
@@ -84,8 +84,8 @@
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.account != null}">
-                    <li class="nav-item" style="margin: 0 30px 0 150px">
-                        <a class="nav-link" href="logins?action=login">
+                    <li class="nav-item" style="margin: 0 30px 0 100px">
+                        <a class="nav-link" href="accounts?action=detail&&idAccount=${account.idAccount}">
                             <i class="fa-solid fa-user" style="font-size: 18px"></i>
                             <strong> ${sessionScope.account.username}</strong></a>
                     </li>

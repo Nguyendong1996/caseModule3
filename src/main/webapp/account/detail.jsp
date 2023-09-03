@@ -28,11 +28,6 @@
     <div class="container" style="margin-top: 40px">
         <hr>
         <h1 style="text-align: center">Danh sách tài khoản </h1>
-        <c:if test="${create != null}">
-            <script>
-                alert("${create}")
-            </script>
-        </c:if>
         <c:if test="${update != null}">
             <script>
                 alert("${update}")
@@ -47,28 +42,20 @@
                 <th>Vai trò</th>
                 <th style="width: 15%" colspan="2">Action</th>
             </tr>
-            <c:forEach items="${accounts}" var="a" varStatus="index">
                 <tr>
-                    <td><c:out value="${index.count}"/></td>
-                    <td><c:out value="${a.username}"/></td>
-                    <td><c:out value="${a.password}"/></td>
-                    <td><c:if test="${a.isAdmin()}">Quản lý</c:if>
-                    <c:if test="${a.isAdmin()== false}">Khách hàng</c:if></td>
-                    <td><a class="btn btn-danger" onclick="deleteAccount(${a.idAccount})" href="accounts?action=delete&&idAccount=${a.idAccount}">Xóa</a>
+                    <td><c:out value="${1}"/></td>
+                    <td><c:out value="${account.username}"/></td>
+                    <td><c:out value="${account.password}"/></td>
+                    <td><c:if test="${account.isAdmin()}">Quản lý</c:if>
+                        <c:if test="${account.isAdmin()== false}">Khách hàng</c:if></td>
+                    <td><a class="btn btn-warning" href="accounts?action=update&&idAccount=${account.idAccount}">Đổi mật khẩu</a>
                     </td>
                 </tr>
-            </c:forEach>
         </table>
     </div>
     <jsp:include page="../footer.jsp"/>
 </div>
-<script>
-    function deleteAccount(id) {
-        if (confirm("Bạn có muốn xóa không?")) {
-            window.location.href = "accounts?action=delete&&idAccount=" + id
-        }
-    }
-</script>
+
 </body>
 
 </html>
