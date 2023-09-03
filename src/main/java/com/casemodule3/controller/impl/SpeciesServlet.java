@@ -54,7 +54,7 @@ public class SpeciesServlet extends HttpServlet implements IGenerateServlet {
     public void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Species> speciesList = SpeciesService.getInstance().findAll();
         request.setAttribute("species", speciesList);
-        RequestDispatcher rd = request.getRequestDispatcher("species/display.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("species/displayAdmin.jsp");
         rd.forward(request, response);
     }
 
