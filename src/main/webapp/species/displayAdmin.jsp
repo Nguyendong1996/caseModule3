@@ -45,7 +45,7 @@
                 <th>Tên giống loài</th>
                 <th style="width: 15%" colspan="2">Action</th>
             </tr>
-            <c:forEach items="${species}" var="s" varStatus="index">
+            <c:forEach items="${speciesList}" var="s" varStatus="index">
                 <tr>
                     <td><c:out value="${index.count}"/></td>
                     <td><a href="species?action=display1&&idSpecies=${s.idSpecies}"><c:out

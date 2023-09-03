@@ -62,19 +62,19 @@
     <div class="row">
         <div class="col-3" >
             <div class="list-group">
-                <a href="#" class="list-group-item active">Danh mục thú cưng</a>
+                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Danh mục thú cưng</a>
                 <c:forEach items="${speciesList}" var="s">
                     <a href="pets?action=displayBySpecies&&idSpecies=${s.idSpecies}"
                        class="list-group-item"><c:out value="${s.nameSpecies}"/></a>
                 </c:forEach>
             </div>
             <div class="list-group">
-                <a href="#" class="list-group-item active">Sắp xếp theo giá</a>
+                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Sắp xếp theo giá</a>
                 <a class="list-group-item" href="pets?action=sortByPriceAS">Theo giá từ thấp đến cao</a>
                 <a class="list-group-item" href="pets?action=sortByPriceDESC">Theo giá từ cao đến thấp</a>
             </div>
             <div class="list-group">
-                <a href="#" class="list-group-item active">Tìm kiếm theo giá</a>
+                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Tìm kiếm theo giá</a>
                 <a class="list-group-item" href="pets?action=searchByPrice&minPrice=1000000&maxPrice=5000000">1 triệu - 5 triệu</a>
                 <a class="list-group-item" href="pets?action=searchByPrice&minPrice=5000000&maxPrice=10000000">5 triệu - 10 triệu</a>
                 <a class="list-group-item" href="pets?action=searchByPrice&minPrice=10000000&maxPrice=15000000">10 triệu - 15 triệu</a>

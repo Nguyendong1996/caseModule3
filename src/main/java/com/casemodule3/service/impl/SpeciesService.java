@@ -10,8 +10,9 @@ import java.util.List;
 
 public class SpeciesService implements IGenerateService<Species> {
     private static SpeciesService speciesService;
-    public static SpeciesService getInstance(){
-        if (speciesService == null){
+
+    public static SpeciesService getInstance() {
+        if (speciesService == null) {
             speciesService = new SpeciesService();
         }
         return speciesService;
@@ -31,9 +32,9 @@ public class SpeciesService implements IGenerateService<Species> {
 
     @Override
     public void create(HttpServletRequest request) {
-String nameSpecies = request.getParameter("nameSpecies");
-Species species = new Species(nameSpecies);
-SpeciesDAO.getInstance().create(species);
+        String nameSpecies = request.getParameter("nameSpecies");
+        Species species = new Species(nameSpecies);
+        SpeciesDAO.getInstance().create(species);
     }
 
     @Override
@@ -46,7 +47,7 @@ SpeciesDAO.getInstance().create(species);
     public void update(HttpServletRequest request) {
         int idSpecies = Integer.parseInt(request.getParameter("idSpecies"));
         String nameSpecies = request.getParameter("nameSpecies");
-        Species species = new Species(idSpecies,nameSpecies);
+        Species species = new Species(idSpecies, nameSpecies);
         SpeciesDAO.getInstance().update(species);
     }
 }

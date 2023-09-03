@@ -156,9 +156,9 @@
                             <label for="species" class="form-label">* Giống Loài</label>
                             <select name="idSpecies" class="form-select" id="species"
                                     aria-label="Default select example">
-                                <c:forEach items="${species}" var="c">
-                                    <option value="<c:out value="${c.idSpecies}"/>">
-                                        <c:out value="${c.nameSpecies}"/>
+                                <c:forEach items="${speciesList}" var="s">
+                                    <option value="<c:out value="${s.idSpecies}"/>">
+                                        <c:out value="${s.nameSpecies}"/>
                                     </option>
                                 </c:forEach>
                             </select>

@@ -86,8 +86,8 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
 
     @Override
     public void createGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Species> species = SpeciesService.getInstance().findAll();
-        request.setAttribute("species", species);
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rd = request.getRequestDispatcher("pet/create.jsp");
         rd.forward(request, response);
     }
@@ -103,9 +103,9 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
     @Override
     public void updateGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Pet pet = PetService.getInstance().findOne(request);
-        List<Species> species = SpeciesService.getInstance().findAll();
+        List<Species> speciesList = SpeciesService.getInstance().findAll();
         request.setAttribute("pet", pet);
-        request.setAttribute("species", species);
+        request.setAttribute("speciesList", speciesList);
         RequestDispatcher rd = request.getRequestDispatcher("pet/update.jsp");
         rd.forward(request, response);
     }

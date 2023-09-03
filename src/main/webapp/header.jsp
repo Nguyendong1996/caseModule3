@@ -2,7 +2,7 @@
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 30px">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color: rgba(176,116,116,0.84)">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
@@ -65,7 +65,7 @@
                     <form class="d-flex" action="pets?action=searchByName" method="post">
                         <input style="height: 45px ; margin-top: 5px" class="form-control me-2" type="search"
                                placeholder="Tìm kiếm" aria-label="Search" name="search" value="${search}">
-                        <button style="font-size: 20px; border: none; background-color: snow; margin-right: 10px"
+                        <button style="font-size: 20px; border: none; background-color: rgba(178,121,121,0.84); margin-right: 10px"
                                 type="submit"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
@@ -100,7 +100,8 @@
 <%--<c:if test="${sessionScope.account.isAdmin() == false }">--%>
             <div style="margin-bottom: 33px">Giỏ hàng</div>
             <a class="nav-link" style="margin-bottom: 14px" href="#">
-                <i class="fa-solid fa-cart-shopping" style="width: 50px; font-size: 30px; margin-bottom: 13px"></i>
+                <i class="fa-solid fa-cart-shopping"
+                   style="width: 50px; font-size: 30px; margin-bottom: 13px; color: rgb(17,72,114)"></i>
             </a>
         </div>
 <%--        </c:if>--%>
