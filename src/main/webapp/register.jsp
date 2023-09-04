@@ -30,6 +30,13 @@
     <link rel="stylesheet" type="text/css" href="login/css/util.css">
     <link rel="stylesheet" type="text/css" href="login/css/main.css">
     <!--===============================================================================================-->
+    <style>
+        .check {
+            color: red;
+            font-size: 18px;
+            margin-left: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -39,16 +46,22 @@
 				<span class="login100-form-title p-b-41">
 					Đăng ký
 				</span>
-            <p class="text-danger alert" style="font-size: 20px"> <c:out value="${errorPass}"/></p>
-            <p class="text-danger alert" style="font-size: 20px"> <c:out value="${errorUsername}"/></p>
+            <div class="check"><c:out value="${errorPass}"/></div>
+            <div class="check"><c:out value="${errorUsername}"/></div>
+            <div class="check"><c:out value="${errorUsernameFormat}"/></div>
+            <div class="check"><c:out value="${errorUsernameLength}"/></div>
+            <div class="check"><c:out value="${errorPasswordFormat}"/></div>
+            <div class="check"><c:out value="${errorPasswordLength}"/></div>
             <form class="login100-form validate-form p-b-33 p-t-5" action="logins?action=register" method="post">
-                <div class="wrap-input100 validate-input" data-validate = "Enter username" >
+                <div class="wrap-input100 validate-input" data-validate="Enter username">
                     <input class="input100" type="text" name="username" placeholder="Tên tài khoản" required>
+
                     <span class="focus-input100" data-placeholder="&#xe82a;"></span>
                 </div>
 
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
                     <input class="input100" type="password" name="password" placeholder="Mật khẩu" required>
+
                     <span class="focus-input100" data-placeholder="&#xe80f;"></span>
                 </div>
                 <div class="wrap-input100 validate-input" data-validate="Enter password">

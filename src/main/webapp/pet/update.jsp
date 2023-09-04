@@ -88,14 +88,14 @@
                             <label class="form-label">* Màu sắc</label>
 
                             <select class="form-select" aria-label="select example" name="color">
-                                <option value="Màu đen trắng">Màu đen trắng</option>
-                                <option value="Màu kem">Màu kem</option>
-                                <option value="Màu nâu">Màu nâu</option>
-                                <option value="Màu nâu đỏ">Màu nâu đỏ</option>
-                                <option value="Màu xám">Màu xám</option>
-                                <option value="Màu vàng">Màu vàng</option>
-                                <option value="Màu trắng">Màu trắng</option>
-                                <option value="Màu trắng sữa">Màu trắng sữa</option>
+                                <option value="Màu đen trắng" ${pet.getColor().equals("Màu đen trắng") ? 'selected' : ''}>Màu đen trắng</option>
+                                <option value="Màu kem" ${pet.getColor().equals("Màu kem") ? 'selected' : ''}>Màu kem</option>
+                                <option value="Màu nâu" ${pet.getColor().equals("Màu nâu") ? 'selected' : ''}>Màu nâu đỏ</option>
+                                <option value="Màu nâu đỏ" ${pet.getColor().equals("Màu nâu đỏ") ? 'selected' : ''}>Màu nâu đỏ</option>
+                                <option value="Màu xám" ${pet.getColor().equals("Màu xám") ? 'selected' : ''}>Màu xám</option>
+                                <option value="Màu vàng" ${pet.getColor().equals("Màu vàng") ? 'selected' : ''}>Màu vàng</option>
+                                <option value="Màu trắng" ${pet.getColor().equals("Màu trắng") ? 'selected' : ''}>Màu trắng</option>
+                                <option value="Màu trắng sữa" ${pet.getColor().equals("Màu trắng sữa") ? 'selected' : ''}>Màu trắng sữa</option>
                             </select>
                         </div>
                     </div>
@@ -104,9 +104,9 @@
                             <label class="form-label">* Tiêm phòng vắc xin</label>
 
                             <select class="form-select" required aria-label="select example" name="vaccination">
-                                <option value="1">1 mũi</option>
-                                <option value="2">2 mũi</option>
-                                <option value="3">3 mũi</option>
+                                <option value="1 mũi" ${pet.getVaccination().equals("1 mũi") ? 'selected' : ''}>1 mũi</option>
+                                <option value="2 mũi" ${pet.getVaccination().equals("2 mũi") ? 'selected' : ''}>2 mũi</option>
+                                <option value="3 mũi" ${pet.getVaccination().equals("3 mũi") ? 'selected' : ''}>3 mũi</option>
                             </select>
                             <div class="invalid-feedback">Example invalid select feedback</div>
                         </div>

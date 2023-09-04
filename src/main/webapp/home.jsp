@@ -62,19 +62,19 @@
     <div class="row">
         <div class="col-3" >
             <div class="list-group">
-                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Danh mục thú cưng</a>
+                <a href="#" class="list-group-item active" style="background-color: #115b91">Danh mục thú cưng</a>
                 <c:forEach items="${speciesList}" var="s">
                     <a href="pets?action=displayBySpecies&&idSpecies=${s.idSpecies}"
                        class="list-group-item"><c:out value="${s.nameSpecies}"/></a>
                 </c:forEach>
             </div>
             <div class="list-group">
-                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Sắp xếp theo giá</a>
+                <a href="#" class="list-group-item active" style="background-color: #115b91">Sắp xếp theo giá</a>
                 <a class="list-group-item" href="pets?action=sortByPriceAS">Theo giá từ thấp đến cao</a>
                 <a class="list-group-item" href="pets?action=sortByPriceDESC">Theo giá từ cao đến thấp</a>
             </div>
             <div class="list-group">
-                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Tìm kiếm theo giá</a>
+                <a href="#" class="list-group-item active" style="background-color: #115b91">Tìm kiếm theo giá</a>
                 <a class="list-group-item" href="pets?action=searchByPrice&minPrice=1000000&maxPrice=5000000">1 triệu - 5 triệu</a>
                 <a class="list-group-item" href="pets?action=searchByPrice&minPrice=5000000&maxPrice=10000000">5 triệu - 10 triệu</a>
                 <a class="list-group-item" href="pets?action=searchByPrice&minPrice=10000000&maxPrice=15000000">10 triệu - 15 triệu</a>
@@ -91,7 +91,9 @@
                                              href="pets?action=detail&&idPet=${p.idPet}"><c:out
                             value="${p.namePet}"/></a></div>
                     <div class="pricePet1"><c:out value="${p.price}"/> VNĐ</div>
-                    <a class="btn btn-info" href="pets?action=cart&&idPet=${p.idPet}&&idUser=${account.idAccount}">Thêm vào giỏ hàng</a>
+
+                    <a class="btn btn-info" href="javascript:void(0);" onclick="addToCart(${p.idPet})">Thêm vào giỏ hàng</a>
+
                 </div>
             </div>
         </c:forEach>
@@ -107,5 +109,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
+
+
+<script>
+    function addToCart(idPet) {
+        if (${sessionScope.account == null}) {
+            alert("Vui lòng đăng nhập để thêm vào giỏ hàng.");
+        } else {
+            window.location.href = "carts?action=create&idPet=" + idPet;
+        }
+    }
+</script>
 </body>
 </html>

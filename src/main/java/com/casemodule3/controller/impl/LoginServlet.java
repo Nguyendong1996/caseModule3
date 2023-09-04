@@ -71,6 +71,31 @@ public class LoginServlet extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String re_password = request.getParameter("re_password");
+        if (!username.matches("[a-zA-Z0-9]+")) {
+            request.setAttribute("errorUsernameFormat", "Tên tài khoản chỉ được chứa chữ cái và số");
+            RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
+            rq.forward(request, response);
+            return;
+        }
+        if (username.length() < 6) {
+            request.setAttribute("errorUsernameLength", "Tên tài khoản phải có ít nhất 6 ký tự");
+            RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
+            rq.forward(request, response);
+            return;
+        }
+        if (password.length() < 6) {
+            request.setAttribute("errorPasswordFormat", "Mật khẩu phải có ít nhất 6 ký tự");
+            RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
+            rq.forward(request, response);
+            return;
+        }
+        if (!password.matches("[a-zA-Z0-9]+")) {
+            request.setAttribute("errorPasswordLength", "Mật khẩu chỉ được chứa chữ cái và số");
+            RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
+            rq.forward(request, response);
+            return;
+        }
+
         if (!password.equals(re_password)) {
             request.setAttribute("errorPass","Mật khẩu bạn nhập không giống nhau");
             RequestDispatcher rq = request.getRequestDispatcher("register.jsp");
