@@ -88,11 +88,11 @@
                         <img src="${p.image}" alt="image" width="270x" height="300px" style="margin-left: 7px"></div>
                     <div class="overlay"></div>
                     <div class="namePet1"><a style="text-decoration: none; color: brown"
-                                             href="pets?action=detail&&idPet=${p.idPet}"><c:out
+                                             href="pets?action=detail&&idPet=${p.idPet}&&idUser=${account.idAccount}"><c:out
                             value="${p.namePet}"/></a></div>
                     <div class="pricePet1"><c:out value="${p.price}"/> VNĐ</div>
 
-                    <a class="btn btn-info" href="javascript:void(0);" onclick="addToCart(${p.idPet})">Thêm vào giỏ hàng</a>
+                    <a class="btn btn-info" href="javascript:void(0);" onclick="addToCart(${p.idPet},${account.idAccount})">Thêm vào giỏ hàng</a>
 
                 </div>
             </div>
@@ -112,11 +112,11 @@
 
 
 <script>
-    function addToCart(idPet) {
+    function addToCart(idPet,idAccount) {
         if (${sessionScope.account == null}) {
             alert("Vui lòng đăng nhập để thêm vào giỏ hàng.");
         } else {
-            window.location.href = "carts?action=create&idPet=" + idPet;
+            window.location.href = "pets?action=cart&idPet=" + idPet +"&idUser=" + idAccount;
         }
     }
 </script>

@@ -40,6 +40,7 @@ public class UserDAO implements IGenerateDAO<User> {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
+                int idUser = resultSet.getInt("idUser");
                 int idAccount = resultSet.getInt("idAccount");
                 Account account = AccountDAO.getInstance().findOne(idAccount);
                 String fullName = resultSet.getString("fullName");
@@ -48,7 +49,7 @@ public class UserDAO implements IGenerateDAO<User> {
                 String phone = resultSet.getString("phone");
                 String email = resultSet.getString("email");
                 String address = resultSet.getString("address");
-                User user = new User(account, fullName, dob, sex, phone, email, address);
+                User user = new User(idUser,account, fullName, dob, sex, phone, email, address);
                 users.add(user);
             }
             connection.close();
@@ -56,27 +57,27 @@ public class UserDAO implements IGenerateDAO<User> {
         } catch (SQLException e) {
             e.getStackTrace();
         }
-        try {
-            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
-            ResultSet resultSet = preparedStatement.getResultSet();
-            while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
-                int idAccount = resultSet.getInt("idAccount");
-                Account account = AccountDAO.getInstance().findOne(idAccount);
-                String fullName = resultSet.getString("fullName");
-                LocalDate dob = resultSet.getObject("dob", LocalDate.class);
-                String sex = resultSet.getString("sex");
-                String phone = resultSet.getString("phone");
-                String email = resultSet.getString("email");
-                String address = resultSet.getString("address");
-                User user = new User(account, fullName, dob, sex, phone, email, address);
-                users.add(user);
-            }
-            connection.close();
-
-        } catch (SQLException e) {
-            e.getStackTrace();
-        }
+//        try {
+//            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
+//            ResultSet resultSet = preparedStatement.getResultSet();
+//            while (resultSet.next()) {
+//                int idUser = resultSet.getInt("idUser");
+//                int idAccount = resultSet.getInt("idAccount");
+//                Account account = AccountDAO.getInstance().findOne(idAccount);
+//                String fullName = resultSet.getString("fullName");
+//                LocalDate dob = resultSet.getObject("dob", LocalDate.class);
+//                String sex = resultSet.getString("sex");
+//                String phone = resultSet.getString("phone");
+//                String email = resultSet.getString("email");
+//                String address = resultSet.getString("address");
+//                User user = new User(account, fullName, dob, sex, phone, email, address);
+//                users.add(user);
+//            }
+//            connection.close();
+//
+//        } catch (SQLException e) {
+//            e.getStackTrace();
+//        }
         return users;
     }
 

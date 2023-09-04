@@ -72,7 +72,7 @@
                     </tr>
                     <tr style="margin-top: 10px">
                         <td colspan="3"><a class="btn btn-danger" style="font-size: 22px; font-weight: bold"
-                                           href="pets?action=update&&idPet=${pet.idPet}">Thêm vào giỏ hàng</a></td>
+                                           href="pets?action=cart&&idPet=${pet.idPet}&&idUser=${account.idAccount}">Thêm vào giỏ hàng</a></td>
                     </tr>
 
                 </table>

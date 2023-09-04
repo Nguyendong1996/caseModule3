@@ -1,8 +1,12 @@
 package com.casemodule3.service.impl;
 
+import com.casemodule3.DAO.impl.AccountDAO;
 import com.casemodule3.DAO.impl.BillDAO;
+import com.casemodule3.DAO.impl.UserDAO;
+import com.casemodule3.model.Account;
 import com.casemodule3.model.Bill;
 import com.casemodule3.model.Cart;
+import com.casemodule3.model.User;
 import com.casemodule3.service.IGenerateService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +34,10 @@ public class BillService implements IGenerateService<Bill> {
 
     @Override
     public void create(HttpServletRequest request) {
-int idUser = Integer.parseInt(request.getParameter("idUser"));
+int idAccount = Integer.parseInt(request.getParameter("idUser"));
+        User user = UserDAO.getInstance().checkIdAccount(idAccount);
+        int idUser = user.getIdUser();
+
 double totalPayment = 0;
 List<Cart> carts = CartService.getInstance().listCartByIdAccount(request);
 for (Cart cart: carts){
