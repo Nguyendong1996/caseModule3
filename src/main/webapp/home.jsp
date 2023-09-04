@@ -8,11 +8,10 @@
     <title>Trang chủ</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <link rel="stylesheet" href="cssHome/Styles.css">
+        <link rel="stylesheet" href="cssHome/Styles.css">
     <link rel="stylesheet" href="cssHome/fontawesome-free-6.4.2-web/css/all.min.css">
     <link rel="stylesheet" href="cssHome/fontawesome-free-6.4.2-web/css/all.css">
     <link rel="stylesheet" href="cssHome/fontawesome-free-6.4.2-web/css/regular.css">
-
 </head>
 <body>
 <div class="container">
@@ -21,7 +20,8 @@
     <!--    Kết thúc thanh menu-->
 
     <!--    Bắt đầu slide-->
-    <div class="item2 item">
+    <%--    <div class="item2 item">--%>
+    <div class="row" style="margin-bottom: 20px">
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -59,48 +59,45 @@
     <!--    Kết thúc slide-->
 
     <!--    Bắt đầu phần danh mục giống loài-->
-
-    <div class="item3 item">
-        <div class="list-group">
-            <a href="#" class="list-group-item active">Danh mục thú cưng</a>
-            <a href="#" class="list-group-item">Chó</a>
-            <a href="#" class="list-group-item">Mèo</a>
+    <div class="row">
+        <div class="col-3" >
+            <div class="list-group">
+                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Danh mục thú cưng</a>
+                <c:forEach items="${speciesList}" var="s">
+                    <a href="pets?action=displayBySpecies&&idSpecies=${s.idSpecies}"
+                       class="list-group-item"><c:out value="${s.nameSpecies}"/></a>
+                </c:forEach>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Sắp xếp theo giá</a>
+                <a class="list-group-item" href="pets?action=sortByPriceAS">Theo giá từ thấp đến cao</a>
+                <a class="list-group-item" href="pets?action=sortByPriceDESC">Theo giá từ cao đến thấp</a>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item active" style="background-color: #a92e2e">Tìm kiếm theo giá</a>
+                <a class="list-group-item" href="pets?action=searchByPrice&minPrice=1000000&maxPrice=5000000">1 triệu - 5 triệu</a>
+                <a class="list-group-item" href="pets?action=searchByPrice&minPrice=5000000&maxPrice=10000000">5 triệu - 10 triệu</a>
+                <a class="list-group-item" href="pets?action=searchByPrice&minPrice=10000000&maxPrice=15000000">10 triệu - 15 triệu</a>
+                <a class="list-group-item" href="pets?action=searchByPrice&minPrice=15000000&maxPrice=20000000">15 triệu - 25 triệu</a>
+            </div>
         </div>
-        <div class="dropdown">
-            <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton1"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false" style="width:230px; text-align: left; margin: 3px 0">
-                Sắp xếp
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Theo giá từ thấp đến cao</a></li>
-                <li><a class="dropdown-item" href="#">Theo giá từ cao đến thấp</a></li>
-            </ul>
-        </div>
-    </div>
-
-    <!--    Kết thúc phần danh mục giống loài-->
-
-    <div class="item4 item">Quảng cáo</div>
-
-    <!--    Bắt đầu  phần danh sách sản phẩm-->
-    <div class="item5 item">
-
         <c:forEach items="${pets}" var="p">
-            <div class="abc">
-                <div class="product" style="margin-top: 3px"><img src="${p.image}" alt="image" width="300x"
-                                                                  height="300px"></div>
-                <div class="product"><a href="pets?action=detail&&idPet=${p.idPet}"><c:out
-                        value="${p.namePet}"/></a></div>
-                <div class="product" style="margin: 5px 50px "><c:out value="${p.price}"/> VNĐ</div>
-                <a class="btn btn-outline-success" href="pets?action=update&&idPet=${p.idPet}">Mua ngay</a>
+            <div class="col-3">
+                <div class="pets">
+                    <div class="image-container">
+                        <img src="${p.image}" alt="image" width="270x" height="300px" style="margin-left: 7px"></div>
+                    <div class="overlay"></div>
+                    <div class="namePet1"><a style="text-decoration: none; color: brown"
+                                             href="pets?action=detail&&idPet=${p.idPet}"><c:out
+                            value="${p.namePet}"/></a></div>
+                    <div class="pricePet1"><c:out value="${p.price}"/> VNĐ</div>
+                    <a class="btn btn-info" href="pets?action=cart&&idPet=${p.idPet}&&idUser=${account.idAccount}">Thêm vào giỏ hàng</a>
+                </div>
             </div>
         </c:forEach>
     </div>
-
-    <!--    Kết thúc phần danh sách sản phẩm-->
-
-    <div class="item6 item">
+    <br>
+    <div>
         <jsp:include page="footer.jsp"/>
     </div>
 </div>

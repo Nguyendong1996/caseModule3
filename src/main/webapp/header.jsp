@@ -1,10 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div class="item1 item">
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 20px">
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 30px">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background-color: rgba(176,116,116,0.84)">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
                 <li class="nav-item">
@@ -23,8 +21,10 @@
                         Giống loài
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#">Chó</a></li>
-                        <li><a class="dropdown-item" href="#">Mèo</a></li>
+                        <c:forEach items="${speciesList}" var="s">
+                            <li><a href="pets?action=displayBySpecies&&idSpecies=${s.idSpecies}"
+                                   class="list-group-item"><c:out value="${s.nameSpecies}"/></a></li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <c:if test="${sessionScope.account.isAdmin()}">
@@ -36,7 +36,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="pets?action=displayAdmin">Danh sách thú cưng</a></li>
                             <li><a class="dropdown-item" href="species">Danh sách giống loài</a></li>
-                            <li><a class="dropdown-item" href="logins">Danh sách khách hàng</a></li>
+                            <li><a class="dropdown-item" href="accounts?action=display">Danh sách tài khoản</a></li>
                         </ul>
                     </li>
                 </c:if>
@@ -62,10 +62,11 @@
                     <c:if test="${sessionScope.account.isAdmin() == false || sessionScope.account == null}">
                 <li style="margin-left: 80px">
                     </c:if>
-                    <form class="d-flex">
+                    <form class="d-flex" action="pets?action=searchByName" method="post">
                         <input style="height: 45px ; margin-top: 5px" class="form-control me-2" type="search"
-                               placeholder="Tìm kiếm" aria-label="Search">
-                        <button class="btn " style="font-size: 27px; width: 40px" type="submit"><i
+                               placeholder="Tìm kiếm" aria-label="Search" name="search" value="${search}">
+                        <button style="font-size: 20px; border: none; background-color: rgba(178,121,121,0.84); margin-right: 10px"
+                                type="submit"><i
                                 class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </li>
@@ -73,7 +74,7 @@
 
                 <c:if test="${sessionScope.account == null}">
 
-                    <li class="nav-item" style="margin-left: 150px">
+                    <li class="nav-item" style="margin-left: 80px">
                         <a class="nav-link" href="logins?action=login">
                             <i class="fa-solid fa-right-to-bracket" style="font-size: 18px"></i> Đăng nhập</a>
                     </li>
@@ -83,12 +84,12 @@
                     </li>
                 </c:if>
                 <c:if test="${sessionScope.account != null}">
-                    <li class="nav-item" style="margin: 0 30px 0 150px">
-                        <a class="nav-link" href="logins?action=login">
+                    <li class="nav-item" style="margin: 0 5px 0 70px">
+                        <a class="nav-link" href="accounts?action=detail&&idAccount=${account.idAccount}">
                             <i class="fa-solid fa-user" style="font-size: 18px"></i>
                             <strong> ${sessionScope.account.username}</strong></a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" style="margin-left: 10px">
                         <a class="nav-link" href="logout">Đăng xuất</a>
                     </li>
 
@@ -96,13 +97,22 @@
 
 
             </ul>
-
-            <a class="nav-link" style="margin-bottom: 14px" href="#">
-                <i class="fa-solid fa-cart-shopping" style="width: 50px; font-size: 30px"></i>
+<%--<c:if test="${sessionScope.account.isAdmin() == false }">--%>
+            <div style="margin-bottom: 33px">Giỏ hàng</div>
+            <a class="nav-link" style="margin-bottom: 14px" href="bills?action=&&idUser=${account.idAccount}">
+                <i class="fa-solid fa-cart-shopping"
+                   style="width: 50px; font-size: 30px; margin-bottom: 13px; color: rgb(17,72,114)"></i>
             </a>
         </div>
+<%--        </c:if>--%>
+<%--        <c:if test="${sessionScope.account == null}">--%>
+<%--            <div style="margin-bottom: 33px">Giỏ hàng</div>--%>
+<%--            <a class="nav-link" style="margin-bottom: 14px" href="#">--%>
+<%--                <i class="fa-solid fa-cart-shopping" style="width: 50px; font-size: 30px; margin-bottom: 13px"></i>--%>
+<%--            </a>--%>
+<%--            </div>--%>
+<%--        </c:if>--%>
 
     </nav>
 
-</div>
 

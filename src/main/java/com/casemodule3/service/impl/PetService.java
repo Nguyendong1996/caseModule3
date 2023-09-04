@@ -75,4 +75,28 @@ public class PetService implements IGenerateService<Pet> {
         PetDAO.getInstance().update(pet);
 
     }
+    public List<Pet> searchByName(HttpServletRequest request) {
+        String search = request.getParameter("search");
+        request.setAttribute("search",search);
+        return PetDAO.getInstance().searchByName(search);
+    }
+    public List<Pet> searchByPrice(HttpServletRequest request) {
+        double minPrice = Double.parseDouble(request.getParameter("minPrice"));
+        double maxPrice = Double.parseDouble(request.getParameter("maxPrice"));
+        request.setAttribute("minPrice",minPrice);
+        request.setAttribute("maxPrice",maxPrice);
+        return PetDAO.getInstance().searchByPrice(minPrice,maxPrice);
+    }
+    public List<Pet> sortByPriceAS(HttpServletRequest request) {
+        return PetDAO.getInstance().sortByPriceAS();
+    }
+    public List<Pet> sortByPriceDESC(HttpServletRequest request) {
+        return PetDAO.getInstance().sortByPriceDESC();
+    }
+
+    public List<Pet> getPetsBySpecies(HttpServletRequest request) {
+        int idSpecies = Integer.parseInt(request.getParameter("idSpecies"));
+        return PetDAO.getInstance().getPetsBySpecies(idSpecies);
+    }
+
 }

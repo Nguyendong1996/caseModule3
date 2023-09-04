@@ -8,7 +8,7 @@
     <title>Thêm mới</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <%--    <link rel="stylesheet" href="../cssHome/Styles.css">--%>
+    <%--    <link rel="stylesheet" href="../cssHome/detail.css">--%>
     <link rel="stylesheet" href="../cssHome/fontawesome-free-6.4.2-web/css/all.min.css">
     <link rel="stylesheet" href="../cssHome/fontawesome-free-6.4.2-web/css/all.css">
     <link rel="stylesheet" href="../cssHome/fontawesome-free-6.4.2-web/css/regular.css">
@@ -66,7 +66,7 @@
                             Giống cái
                         </div>
                         <div class="form-check mb-3">
-                            <input type="radio" class="form-check-input" name="male" required value="Giống Đực">
+                            <input type="radio" class="form-check-input" name="male" required value="Giống đực">
                             Giống đực<br/>
                         </div>
                     </div>
@@ -91,9 +91,9 @@
                             <label class="form-label">* Tiêm phòng vắc xin</label>
 
                             <select class="form-select" required aria-label="select example" name="vaccination">
-                                <option value="1">1 mũi</option>
-                                <option value="2">2 mũi</option>
-                                <option value="3">3 mũi</option>
+                                <option value="1 mũi">1 mũi</option>
+                                <option value="2 mũi">2 mũi</option>
+                                <option value="3 mũi ">3 mũi</option>
                             </select>
                             <div class="invalid-feedback">Example invalid select feedback</div>
                         </div>
@@ -140,7 +140,7 @@
                             <label for="species" class="form-label">* Giống Loài</label>
                             <select name="idSpecies" class="form-select" id="species"
                                     aria-label="Default select example">
-                                <c:forEach items="${species}" var="c">
+                                <c:forEach items="${speciesList}" var="c">
                                     <option value="<c:out value="${c.idSpecies}"/>">
                                         <c:out value="${c.nameSpecies}"/>
                                     </option>

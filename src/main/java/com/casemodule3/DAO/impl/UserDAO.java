@@ -38,13 +38,12 @@ public class UserDAO implements IGenerateDAO<User> {
         Connection connection = MyConnection.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
-            ResultSet resultSet = preparedStatement.getResultSet();
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
                 int idAccount = resultSet.getInt("idAccount");
                 Account account = AccountDAO.getInstance().findOne(idAccount);
                 String fullName = resultSet.getString("fullName");
-                LocalDate dob = resultSet.getObject("dob", LocalDate.class);
+                LocalDate dob = LocalDate.parse(resultSet.getString("dob"));
                 String sex = resultSet.getString("sex");
                 String phone = resultSet.getString("phone");
                 String email = resultSet.getString("email");
@@ -90,7 +89,6 @@ public class UserDAO implements IGenerateDAO<User> {
             ResultSet resultSet = preparedStatement.getResultSet();
             preparedStatement.setInt(1, id);
             while (resultSet.next()) {
-                int idUser = resultSet.getInt("idUser");
                 int idAccount = resultSet.getInt("idAccount");
                 Account account = AccountDAO.getInstance().findOne(idAccount);
                 String fullName = resultSet.getString("fullName");
@@ -161,6 +159,14 @@ public class UserDAO implements IGenerateDAO<User> {
             e.getStackTrace();
         }
 
-
+    }
+    public User checkIdAccount(int id){
+        List<User> users = findAll();
+        for (User user:users){
+            if (user.getAccount().getIdAccount()==id){
+                return user;
+            }
+        }
+        return null;
     }
 }

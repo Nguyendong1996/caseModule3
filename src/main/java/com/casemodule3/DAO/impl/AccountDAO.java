@@ -60,8 +60,8 @@ public class AccountDAO implements IGenerateDAO<Account> {
         Connection connection = MyConnection.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_ID);
-            ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 int idAccount = resultSet.getInt("idAccount");
                 String username = resultSet.getString("username");
@@ -109,7 +109,9 @@ public class AccountDAO implements IGenerateDAO<Account> {
         Connection connection = MyConnection.getInstance().getConnection();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_BY_ID);
-            preparedStatement.setInt(1,account.getIdAccount());
+            preparedStatement.setString(1,account.getUsername());
+            preparedStatement.setString(2,account.getPassword());
+            preparedStatement.setInt(3,account.getIdAccount());
             preparedStatement.executeUpdate();
             connection.close();
         } catch (SQLException e) {

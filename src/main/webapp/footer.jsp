@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Footer -->
-<footer class="bg-light text-center text-white">
+<footer class="bg-light text-center text-white " style="margin-top: 70px">
     <!-- Grid container -->
     <div class="container p-4 pb-0">
         <!-- Section: Social media -->

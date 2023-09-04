@@ -4,6 +4,7 @@ import com.casemodule3.DAO.IGenerateDAO;
 import com.casemodule3.connection.MyConnection;
 import com.casemodule3.model.Bill;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,10 +14,10 @@ import java.util.List;
 
 public class BillDAO implements IGenerateDAO<Bill> {
     private static BillDAO billDAO;
-    private final String SELECT_BILL="select * from bill;";
+    private final String SELECT_BILL="select * from bill ;";
     private final String CREATE_BILL = "insert into bill(idUser,totalPayment,purchaseDate) value(?,?,?);";
     private final String DELETE_SPECIES = "delete from species where idSpecies = ? ;";
-    private final String UPDATE_SPECIES = "update species set nameSpecies = ? where idSpecies = ? ;";
+    private final String UPDATE_SPECIES = "update bill set  = ? where idSpecies = ? ;";
     public static BillDAO getInstance(){
         if (billDAO == null){
             billDAO = new BillDAO();
@@ -27,7 +28,8 @@ public class BillDAO implements IGenerateDAO<Bill> {
     public List<Bill> findAll() {
         List<Bill> bills = new ArrayList<>();
         try {
-            PreparedStatement ps = MyConnection.getInstance().getConnection().prepareStatement(SELECT_BILL);
+            Connection myConnection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = myConnection.prepareStatement(SELECT_BILL);
             ResultSet resultSet = ps.executeQuery();
             while (resultSet.next()){
                 int idBill = resultSet.getInt("idBill");
@@ -37,6 +39,7 @@ public class BillDAO implements IGenerateDAO<Bill> {
                 Bill bill = new Bill(idBill,idUser,totalPayment,purchaseDate);
                 bills.add(bill);
             }
+            myConnection.close();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -47,7 +50,7 @@ public class BillDAO implements IGenerateDAO<Bill> {
     public Bill findOne(int id) {
         List<Bill> bills = findAll();
         for (Bill bill:bills){
-            if (bill.getIdBill() == id){
+            if (bill.getIdUser() == id){
                 return  bill;
             }
         }
@@ -56,7 +59,17 @@ public class BillDAO implements IGenerateDAO<Bill> {
 
     @Override
     public void create(Bill bill) {
-
+        try {
+            Connection connection = MyConnection.getInstance().getConnection();
+            PreparedStatement ps = connection.prepareStatement(CREATE_BILL);
+            ps.setInt(1,bill.getIdUser());
+            ps.setDouble(2,bill.getTotalPayment());
+            ps.setString(3,bill.getPurchaseDate().toString());
+            ps.executeUpdate();
+            connection.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

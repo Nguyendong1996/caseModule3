@@ -2,12 +2,21 @@ package com.casemodule3.service.impl;
 
 import com.casemodule3.DAO.impl.BillDAO;
 import com.casemodule3.model.Bill;
+import com.casemodule3.model.Cart;
 import com.casemodule3.service.IGenerateService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDate;
 import java.util.List;
 
 public class BillService implements IGenerateService<Bill> {
+    private static BillService billService;
+    public static BillService getInstance(){
+        if (billService == null){
+            billService = new BillService();
+        }
+        return billService;
+    }
     @Override
     public List<Bill> findAll() {
         return BillDAO.getInstance().findAll();
@@ -15,12 +24,22 @@ public class BillService implements IGenerateService<Bill> {
 
     @Override
     public Bill findOne(HttpServletRequest request) {
-        int idBill = Integer.parseInt(request.getParameter("idBill"));
-       return BillDAO.getInstance().findOne(idBill);
+        int idUser = Integer.parseInt(request.getParameter("idUser"));
+       return BillDAO.getInstance().findOne(idUser);
     }
 
     @Override
     public void create(HttpServletRequest request) {
+int idUser = Integer.parseInt(request.getParameter("idUser"));
+double totalPayment = 0;
+List<Cart> carts = CartService.getInstance().listCartByIdAccount(request);
+for (Cart cart: carts){
+    totalPayment += cart.getTotalPrice();
+}
+        LocalDate purchaseDate = LocalDate.now();
+Bill bill = new Bill(idUser,totalPayment,purchaseDate);
+request.setAttribute("bill",bill);
+BillDAO.getInstance().create(bill);
 
     }
 

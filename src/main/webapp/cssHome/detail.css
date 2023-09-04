@@ -1,0 +1,51 @@
+.container{
+    font-family: 'Roboto', sans-serif;
+}
+.anh {
+    margin-left: 100px;
+}
+.body {
+    height: 600px;
+    margin: 80px auto;
+    border-radius: 20px;
+    border: 3px solid rgba(218, 177, 177, 0.96);
+    background: #eee7e9;
+}
+th {
+    text-align: left;
+    font-weight: bold;
+    font-size: 21px;
+    color: #333;
+    padding-right: 10px;
+}
+td {
+    font-size: 21px;
+    color: #666;
+    padding: 5px;
+}
+.namePet {
+    text-align: center;
+    font-family: Comic Sans MS
+    cursive;
+    font-weight: bold;
+    font-size: 35px;
+    color: rgb(217, 115, 60);
+}
+.price {
+    text-align: center;
+    font-family: Comic Sans MS
+    cursive;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 27px;
+    color: #af1010;
+}
+.image-container img {
+    transition: transform 0.4s ease;
+}
+
+.image-container:hover img {
+    transform: scale(1.05);
+}
+
+

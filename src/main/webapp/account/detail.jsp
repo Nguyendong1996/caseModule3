@@ -27,12 +27,7 @@
 
     <div class="container" style="margin-top: 40px">
         <hr>
-        <h1 style="text-align: center">Danh sách giống loài </h1>
-        <c:if test="${create != null}">
-            <script>
-                alert("${create}")
-            </script>
-        </c:if>
+        <h1 style="text-align: center">Danh sách tài khoản </h1>
         <c:if test="${update != null}">
             <script>
                 alert("${update}")
@@ -42,32 +37,25 @@
         <table class="table table-hover">
             <tr>
                 <th>STT</th>
-                <th>Tên giống loài</th>
+                <th>Tên tài khoản</th>
+                <th>Mật khẩu</th>
+                <th>Vai trò</th>
                 <th style="width: 15%" colspan="2">Action</th>
             </tr>
-            <c:forEach items="${speciesList}" var="s" varStatus="index">
                 <tr>
-                    <td><c:out value="${index.count}"/></td>
-                    <td><a href="species?action=display1&&idSpecies=${s.idSpecies}"><c:out
-                            value="${s.nameSpecies}"/></a></td>
-                    <td><a class="btn btn-warning" href="species?action=update&&idSpecies=${s.idSpecies}">Cập nhật</a>
-                    </td>
-                    <td><a class="btn btn-danger" onclick="deleteSpecies(${s.idSpecies})" href="species?action=delete&&idSpecies=${s.idSpecies}">Xóa</a>
+                    <td><c:out value="${1}"/></td>
+                    <td><c:out value="${account.username}"/></td>
+                    <td><c:out value="${account.password}"/></td>
+                    <td><c:if test="${account.isAdmin()}">Quản lý</c:if>
+                        <c:if test="${account.isAdmin()== false}">Khách hàng</c:if></td>
+                    <td><a class="btn btn-warning" href="accounts?action=update&&idAccount=${account.idAccount}">Đổi mật khẩu</a>
                     </td>
                 </tr>
-            </c:forEach>
         </table>
-        <a class="btn btn-info" href="species?action=create">Thêm mới</a>
     </div>
     <jsp:include page="../footer.jsp"/>
 </div>
-<script>
-    function deleteSpecies(id) {
-        if (confirm("Bạn có muốn xóa không?")) {
-            window.location.href = "species?action=delete&&idSpecies=" + id
-        }
-    }
-</script>
+
 </body>
 
 </html>
