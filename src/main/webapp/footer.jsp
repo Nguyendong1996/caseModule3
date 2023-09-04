@@ -4,14 +4,14 @@
 <!-- Footer -->
 <footer class="bg-light text-center text-white " style="margin-top: 70px">
     <!-- Grid container -->
-    <div class="container p-4 pb-0">
+    <div class="container p-4 pb-0" style="background-color: #28292d">
         <!-- Section: Social media -->
         <section class="mb-4">
             <!-- Facebook -->
             <a
                     class="btn text-white btn-floating m-1"
                     style="background-color: #3b5998;"
-                    href="#!"
+                    href="#"
                     role="button"
             ><i class="fab fa-facebook-f"></i
             ></a>
