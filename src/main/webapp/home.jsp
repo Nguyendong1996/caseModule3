@@ -91,7 +91,9 @@
                                              href="pets?action=detail&&idPet=${p.idPet}"><c:out
                             value="${p.namePet}"/></a></div>
                     <div class="pricePet1"><c:out value="${p.price}"/> VNĐ</div>
-                    <a class="btn btn-info" href="carts?action=create&&idPet=${p.idPet}">Thêm vào giỏ hàng</a>
+
+                    <a class="btn btn-info" href="javascript:void(0);" onclick="addToCart(${p.idPet})">Thêm vào giỏ hàng</a>
+
                 </div>
             </div>
         </c:forEach>
@@ -107,5 +109,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
+
+
+<script>
+    function addToCart(idPet) {
+        if (${sessionScope.account == null}) {
+            alert("Vui lòng đăng nhập để thêm vào giỏ hàng.");
+        } else {
+            window.location.href = "carts?action=create&idPet=" + idPet;
+        }
+    }
+</script>
 </body>
 </html>

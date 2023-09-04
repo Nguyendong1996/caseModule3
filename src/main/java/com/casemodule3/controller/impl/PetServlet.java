@@ -52,6 +52,7 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
             case "searchByPrice":
                 searchByPrice(request,response);
                 break;
+
         }
     }
 
@@ -68,8 +69,7 @@ public class PetServlet extends HttpServlet implements IGenerateServlet {
             case "searchByName":
                 searchByName(request,response);
                 break;
-            case "searchByPrice":
-                searchByName(request,response);
+
         }
     }
 
