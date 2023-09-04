@@ -26,7 +26,8 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="image-container">
-                    <img class="anh" src="${pet.image}" alt="image" width="450px" height="500px"></div>
+                    <img class="anh" src="${pet.image}" alt="image" width="450px" height="500px"/>
+                </div>
             </div>
             <div class="col-sm-6">
                 <table>
