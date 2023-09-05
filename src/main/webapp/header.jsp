@@ -97,21 +97,14 @@
 
 
             </ul>
-<%--<c:if test="${sessionScope.account.isAdmin() == false }">--%>
+
             <div style="margin-bottom: 33px">Giỏ hàng</div>
             <a class="nav-link" style="margin-bottom: 14px" href="bills?action=&&idUser=${account.idAccount}">
                 <i class="fa-solid fa-cart-shopping"
                    style="width: 50px; font-size: 30px; margin-bottom: 13px; color: rgb(17,72,114)"></i>
             </a>
         </div>
-<%--        </c:if>--%>
-<%--        <c:if test="${sessionScope.account == null}">--%>
-<%--            <div style="margin-bottom: 33px">Giỏ hàng</div>--%>
-<%--            <a class="nav-link" style="margin-bottom: 14px" href="#">--%>
-<%--                <i class="fa-solid fa-cart-shopping" style="width: 50px; font-size: 30px; margin-bottom: 13px"></i>--%>
-<%--            </a>--%>
-<%--            </div>--%>
-<%--        </c:if>--%>
+
 
     </nav>
 
