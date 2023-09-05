@@ -23,36 +23,38 @@ import java.util.List;
 public class BillServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String action = request.getParameter("action");
-if (action == null){
-    action = "";
-}switch (action){
+        String action = request.getParameter("action");
+        if (action == null) {
+            action = "";
+        }
+        switch (action) {
             case "":
-                display(request,response);
+                display(request, response);
                 break;
             case "bill":
-                bill(request,response);
+                bill(request, response);
                 break;
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-String action = request.getParameter("action");
-if (action == null){
-    action ="";
-}switch (action){
+        String action = request.getParameter("action");
+//        if (action == null) {
+//            action = "";
+//        }
+        switch (action) {
             case "createUser":
-                createUserPost(request,response);
+                createUserPost(request, response);
                 break;
         }
     }
 
     public void display(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, IOException {
         List<Cart> carts = CartService.getInstance().listCartByIdAccount(request);
-        request.setAttribute("carts",carts);
+        request.setAttribute("carts", carts);
         RequestDispatcher rs = request.getRequestDispatcher("bill.jsp");
-        rs.forward(request,response);
+        rs.forward(request, response);
 
     }
 
@@ -60,34 +62,36 @@ if (action == null){
     public void bill(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         int idAccount = Integer.parseInt(request.getParameter("idUser"));
         User user = UserDAO.getInstance().checkIdAccount(idAccount);
-        if (user == null){
-            request.setAttribute("idAccount",idAccount);
+        if (user == null) {
+            request.setAttribute("idAccount", idAccount);
             RequestDispatcher rd = request.getRequestDispatcher("user.jsp");
-            rd.forward(request,response);
-        }else {
-        BillService.getInstance().create(request);
-        List<Cart> carts = CartService.getInstance().listCartByIdAccount(request);
-        List<Pet> pets = PetService.getInstance().findAll();
+            rd.forward(request, response);
+        } else {
+            BillService.getInstance().create(request);
+            List<Cart> carts = CartService.getInstance().listCartByIdAccount(request);
+            List<Pet> pets = PetService.getInstance().findAll();
 
-        for (Cart cart:carts){
-            for (Pet pet:pets){
-                if (cart.getPet().getIdPet()==pet.getIdPet()){
-                    int quantity = pet.getQuantity() - cart.getQuantity();
-                    Pet pet1 = new Pet(pet.getIdPet(),pet.getNamePet(),pet.getPrice(),pet.getSpecies(),pet.getColor(),pet.getMale(),pet.getVaccination(),pet.getDeWorming(),pet.getHealth(),quantity,pet.getStatus(),pet.getSource(),pet.getImage());
-                    PetDAO.getInstance().update(pet1);
+            for (Cart cart : carts) {
+                for (Pet pet : pets) {
+                    if (cart.getPet().getIdPet() == pet.getIdPet()) {
+                        int quantity = pet.getQuantity() - cart.getQuantity();
+                        Pet pet1 = new Pet(pet.getIdPet(), pet.getNamePet(), pet.getPrice(), pet.getSpecies(), pet.getColor(), pet.getMale(), pet.getVaccination(), pet.getDeWorming(), pet.getHealth(), quantity, pet.getStatus(), pet.getSource(), pet.getImage());
+                        PetDAO.getInstance().update(pet1);
+                    }
                 }
             }
-        }
-        CartService.getInstance().delete(request);
-        RequestDispatcher rd = request.getRequestDispatcher("/hoa_don.jsp");
-        rd.forward(request,response);
+            CartService.getInstance().delete(request);
+            RequestDispatcher rd = request.getRequestDispatcher("/hoa_don.jsp");
+            rd.forward(request, response);
         }
     }
 
 
     public void createUserPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-UserService.getInstance().create(request);
-response.sendRedirect("/pets");
+        UserService.getInstance().create(request);
+        RequestDispatcher rd = request.getRequestDispatcher("/pets");
+        rd.forward(request, response);
+//        response.sendRedirect("/pets");
     }
 
 
