@@ -30,18 +30,20 @@
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>idBill</th>
-                <th>idUser</th>
-                <th>totalPayment</th>
-                <th>purchaseDate</th>
+                <th>IdUser</th>
+                <th>Tên Khách Hàng</th>
+                <th>Địa chỉ</th>
+                <th>Tổng Tiền</th>
+                <th>Ngày Mua Hàng</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <div style="text-align: center">
                     <tr>
-                        <td>${bill.idBill}</td>
                         <td>${bill.idUser}</td>
+                        <td>${user.fullName}</td>
+                        <td>${user.address}</td>
                         <td>${bill.totalPayment}</td>
                         <td>${bill.purchaseDate}</td>
                     </tr>

@@ -1,13 +1,11 @@
 package com.casemodule3.controller.impl;
 
+import com.casemodule3.DAO.impl.AccountDAO;
 import com.casemodule3.DAO.impl.CartDAO;
 import com.casemodule3.DAO.impl.PetDAO;
 import com.casemodule3.DAO.impl.UserDAO;
 import com.casemodule3.controller.IGenerateServlet;
-import com.casemodule3.model.Bill;
-import com.casemodule3.model.Cart;
-import com.casemodule3.model.Pet;
-import com.casemodule3.model.User;
+import com.casemodule3.model.*;
 import com.casemodule3.service.impl.BillService;
 import com.casemodule3.service.impl.CartService;
 import com.casemodule3.service.impl.PetService;
@@ -80,6 +78,8 @@ public class BillServlet extends HttpServlet {
                     }
                 }
             }
+
+            request.setAttribute("user",user);
             CartService.getInstance().delete(request);
             RequestDispatcher rd = request.getRequestDispatcher("/hoa_don.jsp");
             rd.forward(request, response);
